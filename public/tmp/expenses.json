@@ -1,0 +1,72 @@
+[
+  {
+    "id": 10,
+    "amount": 43.11,
+    "description": "Groceries",
+    "timestamp": "12.02.2022",
+    "categoryId": 3
+  },
+  {
+    "id": 9,
+    "amount": 11.8,
+    "description": "Beers",
+    "timestamp": "12.02.2022",
+    "categoryId": 3
+  },
+  {
+    "id": 8,
+    "amount": 15.99,
+    "description": "Netflix",
+    "timestamp": "11.02.2022",
+    "categoryId": 4
+  },
+  {
+    "id": 7,
+    "amount": 33.2,
+    "description": "Home insurance",
+    "timestamp": "09.02.2022",
+    "categoryId": 1
+  },
+  {
+    "id": 6,
+    "amount": 100.0,
+    "description": "Gas",
+    "timestamp": "06.02.2022",
+    "categoryId": 5
+  },
+  {
+    "id": 5,
+    "amount": 170.0,
+    "description": "Moneyzzz",
+    "timestamp": "05.02.2022",
+    "categoryId": 6
+  },
+  {
+    "id": 4,
+    "amount": 71.32,
+    "description": "Groceries",
+    "timestamp": "05.02.2022",
+    "categoryId": 3
+  },
+  {
+    "id": 3,
+    "amount": 168.9,
+    "description": "Housing util.",
+    "timestamp": "04.02.2022",
+    "categoryId": 1
+  },
+  {
+    "id": 2,
+    "amount": 128.0,
+    "description": "Student loan",
+    "timestamp": "01.02.2022",
+    "categoryId": 2
+  },
+  {
+    "id": 1,
+    "amount": 788.0,
+    "description": "Mortgage",
+    "timestamp": "01.02.2022",
+    "categoryId": 2
+  }
+]

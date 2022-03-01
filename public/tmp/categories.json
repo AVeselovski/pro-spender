@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Utilities",
+    "budget": 500
+  },
+  {
+    "id": 2,
+    "name": "Loans",
+    "budget": 900
+  },
+  {
+    "id": 3,
+    "name": "Living",
+    "budget": 600
+  },
+  {
+    "id": 4,
+    "name": "Subscriptions",
+    "budget": 60
+  },
+  {
+    "id": 5,
+    "name": "Transportation",
+    "budget": 150
+  },
+  {
+    "id": 6,
+    "name": "Vacation fund",
+    "budget": 170
+  }
+]
