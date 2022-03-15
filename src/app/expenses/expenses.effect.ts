@@ -1,7 +1,10 @@
 import fetcher from "utils/fetcher";
+import { mockResponse } from "utils/mockBackend/expenses";
 import HttpErrorResponse from "models/HttpErrorResponse";
 
-export async function fetchExpenses() {
+import type { IExpensesParams } from "./types";
+
+export async function fetchExpenses(params: IExpensesParams) {
   const endpoint = `tmp/expenses.json`;
   const response = await fetcher.get(endpoint);
 
@@ -9,5 +12,5 @@ export async function fetchExpenses() {
     return response;
   }
 
-  return response.data;
+  return mockResponse(response.data, params);
 }

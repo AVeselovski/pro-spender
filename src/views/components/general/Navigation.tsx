@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 
 import Divider from "@mui/material/Divider";
@@ -13,9 +14,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import MenuIcon from "@mui/icons-material/Menu";
-import PersonIcon from "@mui/icons-material/Person";
+import DashboardIcon from "@mui/icons-material/DashboardRounded";
+import CategoryIcon from "@mui/icons-material/CategoryRounded";
+import ExpenseIcon from "@mui/icons-material/ListAltRounded";
+import MenuIcon from "@mui/icons-material/MenuRounded";
+import PersonIcon from "@mui/icons-material/PersonRounded";
 
 const drawerWidth: number = 240;
 
@@ -88,15 +91,25 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
+function getLocationName(path: string) {
+  const _path = path.replace("/", "");
+
+  if (!_path) return "Spendly";
+
+  return _path[0].toUpperCase() + _path.substring(1);
+}
+
 interface NavigationProps {
   isOpen: boolean;
   toggleDrawer: () => void;
 }
 
 function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
+  const location = useLocation();
+
   return (
     <>
-      <AppBar color="primary" isOpen={isOpen} position="fixed">
+      <AppBar color="default" elevation={0} isOpen={isOpen} position="fixed" variant="outlined">
         <Toolbar
           sx={
             {
@@ -118,16 +131,10 @@ function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" noWrap sx={{ flexGrow: 1 }} variant="h6">
-            <Typography component="span" sx={{ fontWeight: 2 }} variant="h6">
-              Pro
-            </Typography>
-            $pender{" "}
-            <Typography component="span" sx={{ fontWeight: 2 }} variant="h6">
-              Dashboard
-            </Typography>
+            {getLocationName(location.pathname)}
           </Typography>
-          <IconButton aria-label="user" color="inherit" edge="start" size="large" sx={{ ml: 2 }}>
-            <PersonIcon />
+          <IconButton aria-label="user" color="inherit" size="large" sx={{ ml: 2 }}>
+            <PersonIcon fontSize="medium" />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -144,6 +151,18 @@ function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
+          </ListItemButton>
+          <ListItemButton component={NavLink} to="/categories">
+            <ListItemIcon>
+              <CategoryIcon />
+            </ListItemIcon>
+            <ListItemText primary="Categories" />
+          </ListItemButton>
+          <ListItemButton component={NavLink} to="/expenses">
+            <ListItemIcon>
+              <ExpenseIcon />
+            </ListItemIcon>
+            <ListItemText primary="Expenses" />
           </ListItemButton>
         </List>
       </Drawer>

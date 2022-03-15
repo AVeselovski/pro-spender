@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "vaults": [1],
+    "username": "John Doe",
+    "email": "john.doe@spendly.com",
+    "password": "password"
+  },
+  {
+    "id": 2,
+    "vaults": [1],
+    "username": "Jane Doe",
+    "email": "jane.doe@spendly.com",
+    "password": "password"
+  }
+]

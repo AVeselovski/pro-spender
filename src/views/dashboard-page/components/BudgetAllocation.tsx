@@ -1,16 +1,14 @@
-import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import { useAppSelector } from "app/store";
-import {
-  selectCategoriesWithExpenses,
-  selectRawCategories,
-} from "app/categories/categories.selector";
+import { selectCategoriesWithExpenses } from "app/categories/categories.selector";
 
+import { styled, Theme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import PercentIcon from "@mui/icons-material/Percent";
+import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 
 interface TitleProps {
   children?: React.ReactNode;
@@ -19,12 +17,13 @@ interface TitleProps {
 export function Title(props: TitleProps) {
   return (
     <Typography
-      color="primary"
+      color="text"
       component="h2"
       gutterBottom
       sx={{
         alignItems: "center",
         display: "flex",
+        mb: 0,
       }}
       variant="h6"
     >
@@ -33,8 +32,24 @@ export function Title(props: TitleProps) {
   );
 }
 
+const BorderLinearProgress = styled(LinearProgress, {
+  shouldForwardProp: (prop) => prop !== "overflow",
+})(({ theme, overflow }: { theme?: Theme; overflow: boolean }) => ({
+  borderRadius: 5,
+  height: 10,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: theme!.palette.grey[theme!.palette.mode === "light" ? 200 : 800],
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    backgroundColor: overflow ? theme!.palette.error.light : theme!.palette.success.light,
+    borderRadius: 5,
+  },
+}));
+
 function BudgetAllocation() {
   const budgetAllocationItems = useAppSelector((state) => selectCategoriesWithExpenses(state));
+
+  console.log(budgetAllocationItems);
 
   const getBarWidth = (val: number) => {
     if (val > 100) return 100;
@@ -43,56 +58,65 @@ function BudgetAllocation() {
   };
 
   return (
-    <div>
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+    <Paper
+      sx={{
+        px: 2,
+        py: 2,
+        display: "flex",
+        flexDirection: "column",
+      }}
+      variant="outlined"
+    >
+      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: 3 }}>
         <Title>Budget allocation</Title>
+        <Link
+          align="right"
+          color="primary"
+          component={NavLink}
+          sx={{ fontWeight: "fontWeightMedium" }}
+          to="/categories"
+        >
+          Manage
+        </Link>
       </Box>
-      <Box sx={{ mt: 1 }}>
+      <Box>
         {budgetAllocationItems.map((item) => (
-          <Box key={item.id} sx={{ mb: 2 }}>
+          <Box key={item.id} sx={{ mb: 2.5 }}>
             <Box
               sx={{
-                display: "flex",
                 alignItems: "flex-start",
+                display: "flex",
                 justifyContent: "space-between",
+                mb: 0.25,
                 width: "100%",
               }}
             >
               <Typography
                 sx={{
                   color: "text.primary",
-                  fontSize: "fontSize",
-                  fontWeight: "fontWeightMedium",
                 }}
+                variant="subtitle2"
               >
                 {item.name}
               </Typography>
-              <Typography sx={{ color: item.rawPercentage > 100 ? "error.main" : "text.primary" }}>
+              <Typography
+                sx={{
+                  color: item.rawPercentage > 100 ? "error.main" : "text.primary",
+                }}
+                variant="body2"
+              >
                 {item.sum}€ / {item.budget}€ ({item.percentage}%)
               </Typography>
             </Box>
-            <Box
-              sx={{
-                height: "10px",
-                border: "1px solid",
-                borderColor: item.rawPercentage > 100 ? "error.light" : "success.light",
-                borderRadius: "999px",
-                width: "100%",
-              }}
-            >
-              <Box
-                sx={{
-                  height: "8px",
-                  backgroundColor: item.rawPercentage > 100 ? "error.light" : "success.light",
-                  borderRadius: "999px",
-                  width: `${getBarWidth(item.rawPercentage)}%`,
-                }}
-              ></Box>
-            </Box>
+            <BorderLinearProgress
+              overflow={item.rawPercentage > 100}
+              variant="determinate"
+              value={getBarWidth(item.rawPercentage || 0)}
+            />
           </Box>
         ))}
       </Box>
-    </div>
+    </Paper>
   );
 }
 

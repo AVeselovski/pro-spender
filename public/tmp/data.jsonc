@@ -1,0 +1,30 @@
+// params: (auth/token), vaultId, period (startDate: "2022-02-01T00:00:00.000Z")
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Loans",
+      "description": "Mortgage, student loans, etc.",
+      "baseBudget": 900,
+      "color": 2,
+      // param: current period
+      "periods": [
+        {
+          "id": 1,
+          "startDate": "01.01.2022",
+          "endDate": "31.01.2022",
+          "budget": 900,
+          "expenses": [
+            {
+              "id": 42,
+              "amount": 52.1,
+              "description": "Groceries",
+              "date": "26.02.2022",
+              "categoryId": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -14,3 +14,16 @@ export interface IExpense {
   timestamp: string;
   categoryId: number;
 }
+
+export type Sortable = "date" | "expense" | "category" | "amount";
+export type Order = "asc" | "desc";
+
+export interface IExpensesParams {
+  page: string;
+  rows: string;
+  sort: Sortable;
+  order: Order;
+  period?: string;
+  category?: string;
+  q?: string;
+}

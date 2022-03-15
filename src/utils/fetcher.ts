@@ -20,7 +20,8 @@ export interface IRequestOptions {
 async function fetcher(
   endpoint: string,
   method: string = "GET",
-  body: { [key: string]: string } | undefined = undefined
+  body: { [key: string]: string } | undefined = undefined,
+  params: { [key: string]: string } | undefined = undefined
 ) {
   // const token = store.getState().auth.token;
   const options: IRequestOptions = {
@@ -41,10 +42,8 @@ async function fetcher(
 
   try {
     const response = await fetch(`${API_URL}/${endpoint}`, options);
-    // console.log(response);
 
     responseData = await response.json();
-    // console.log(responseData);
 
     if (!response.ok) {
       const errorMsg = responseData.message
@@ -80,8 +79,8 @@ async function fetcher(
 /**
  * @param endpoint Endpoint path
  */
-fetcher.get = function (endpoint: string) {
-  return fetcher(endpoint, "GET");
+fetcher.get = function (endpoint: string, params?: { [key: string]: any }) {
+  return fetcher(endpoint, "GET", undefined, params);
 };
 
 /**

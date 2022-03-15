@@ -1,72 +1,426 @@
 [
   {
-    "id": 10,
-    "amount": 43.11,
+    "id": 53,
+    "periodId": 3,
+    "categoryId": 3,
+    "amount": 53.11,
     "description": "Groceries",
-    "timestamp": "12.02.2022",
-    "categoryId": 3
+    "date": "2022-03-12T14:30:00.000Z"
+  },
+  {
+    "id": 52,
+    "periodId": 3,
+    "categoryId": 3,
+    "amount": 16.8,
+    "description": "Beers",
+    "date": "2022-03-12T14:00:00.000Z"
+  },
+  {
+    "id": 51,
+    "periodId": 3,
+    "categoryId": 4,
+    "amount": 15.99,
+    "description": "Netflix",
+    "date": "2022-03-11T14:00:00.000Z"
+  },
+  {
+    "id": 50,
+    "periodId": 3,
+    "categoryId": 1,
+    "amount": 33.2,
+    "description": "Home insurance",
+    "date": "2022-03-09T14:00:00.000Z"
+  },
+  {
+    "id": 49,
+    "periodId": 3,
+    "categoryId": 5,
+    "amount": 100.0,
+    "description": "Gas",
+    "date": "2022-03-06T14:00:00.000Z"
+  },
+  {
+    "id": 48,
+    "periodId": 3,
+    "categoryId": 6,
+    "amount": 170.0,
+    "description": "Moneyzzz",
+    "date": "2022-03-05T14:30:00.000Z"
+  },
+  {
+    "id": 47,
+    "periodId": 3,
+    "categoryId": 3,
+    "amount": 76.32,
+    "description": "Groceries",
+    "date": "2022-03-05T14:00:00.000Z"
+  },
+  {
+    "id": 46,
+    "periodId": 3,
+    "categoryId": 1,
+    "amount": 168.9,
+    "description": "Housing util.",
+    "date": "2022-03-04T14:00:00.000Z"
+  },
+  {
+    "id": 45,
+    "periodId": 3,
+    "categoryId": 2,
+    "amount": 128.0,
+    "description": "Student loan",
+    "date": "2022-03-01T14:30:00.000Z"
+  },
+  {
+    "id": 44,
+    "periodId": 3,
+    "categoryId": 2,
+    "amount": 788.0,
+    "description": "Mortgage",
+    "date": "2022-03-01T14:00:00.000Z"
+  },
+  {
+    "id": 43,
+    "periodId": 2,
+    "categoryId": 3,
+    "amount": 43.19,
+    "description": "Groceries",
+    "date": "2022-02-28T14:00:00.000Z"
+  },
+  {
+    "id": 42,
+    "periodId": 2,
+    "categoryId": 3,
+    "amount": 52.1,
+    "description": "Groceries",
+    "date": "2022-02-26T14:00:00.000Z"
+  },
+  {
+    "id": 41,
+    "periodId": 2,
+    "categoryId": 3,
+    "amount": 15.9,
+    "description": "Beers",
+    "date": "2022-02-25T14:30:00.000Z"
+  },
+  {
+    "id": 40,
+    "periodId": 2,
+    "categoryId": 3,
+    "amount": 5.9,
+    "description": "Snack",
+    "date": "2022-02-25T14:00:00.000Z"
+  },
+  {
+    "id": 39,
+    "periodId": 2,
+    "categoryId": 1,
+    "amount": 33.2,
+    "description": "Butt insurance",
+    "date": "2022-02-20T14:30:00.000Z"
+  },
+  {
+    "id": 38,
+    "periodId": 20,
+    "categoryId": 4,
+    "amount": 14.99,
+    "description": "Xbox",
+    "date": "2022-02-20T14:00:00.000Z"
+  },
+  {
+    "id": 37,
+    "periodId": 2,
+    "categoryId": 3,
+    "amount": 17.9,
+    "description": "Snack",
+    "date": "2022-02-19T14:00:00.000Z"
+  },
+  {
+    "id": 36,
+    "periodId": 2,
+    "categoryId": 3,
+    "amount": 42.2,
+    "description": "Eating out",
+    "date": "2022-02-18T14:30:00.000Z"
+  },
+  {
+    "id": 35,
+    "periodId": 2,
+    "categoryId": 1,
+    "amount": 270.5,
+    "description": "Electricity",
+    "date": "2022-02-18T14:00:00.000Z"
+  },
+  {
+    "id": 34,
+    "periodId": 2,
+    "categoryId": 3,
+    "amount": 111.13,
+    "description": "Groceries",
+    "date": "2022-02-16T14:00:00.000Z"
+  },
+  {
+    "id": 33,
+    "periodId": 20,
+    "categoryId": 4,
+    "amount": 12.99,
+    "description": "Youtube",
+    "date": "2022-02-15T14:00:00.000Z"
+  },
+  {
+    "id": 32,
+    "periodId": 2,
+    "categoryId": 3,
+    "amount": 53.11,
+    "description": "Groceries",
+    "date": "2022-02-12T14:30:00.000Z"
+  },
+  {
+    "id": 31,
+    "periodId": 2,
+    "categoryId": 3,
+    "amount": 16.8,
+    "description": "Beers",
+    "date": "2022-02-12T14:00:00.000Z"
+  },
+  {
+    "id": 30,
+    "periodId": 20,
+    "categoryId": 4,
+    "amount": 15.99,
+    "description": "Netflix",
+    "date": "2022-02-11T14:00:00.000Z"
+  },
+  {
+    "id": 29,
+    "periodId": 2,
+    "categoryId": 1,
+    "amount": 33.2,
+    "description": "Home insurance",
+    "date": "2022-02-09T14:00:00.000Z"
+  },
+  {
+    "id": 28,
+    "periodId": 21,
+    "categoryId": 5,
+    "amount": 100.0,
+    "description": "Gas",
+    "date": "2022-02-06T14:00:00.000Z"
+  },
+  {
+    "id": 27,
+    "periodId": 22,
+    "categoryId": 6,
+    "amount": 170.0,
+    "description": "Moneyzzz",
+    "date": "2022-02-05T14:30:00.000Z"
+  },
+  {
+    "id": 26,
+    "periodId": 2,
+    "categoryId": 3,
+    "amount": 76.32,
+    "description": "Groceries",
+    "date": "2022-02-05T14:00:00.000Z"
+  },
+  {
+    "id": 25,
+    "periodId": 2,
+    "categoryId": 1,
+    "amount": 168.9,
+    "description": "Housing util.",
+    "date": "2022-02-04T14:00:00.000Z"
+  },
+  {
+    "id": 24,
+    "periodId": 2,
+    "categoryId": 2,
+    "amount": 128.0,
+    "description": "Student loan",
+    "date": "2022-02-01T14:30:00.000Z"
+  },
+  {
+    "id": 23,
+    "periodId": 2,
+    "categoryId": 2,
+    "amount": 788.0,
+    "description": "Mortgage",
+    "date": "2022-02-01T14:00:00.000Z"
+  },
+  {
+    "id": 22,
+    "periodId": 1,
+    "categoryId": 3,
+    "amount": 36.19,
+    "description": "Bar trip",
+    "date": "2022-01-30T14:00:00.000Z"
+  },
+  {
+    "id": 21,
+    "periodId": 1,
+    "categoryId": 3,
+    "amount": 23.19,
+    "description": "Groceries",
+    "date": "2022-01-29T14:00:00.000Z"
+  },
+  {
+    "id": 20,
+    "periodId": 1,
+    "categoryId": 3,
+    "amount": 72.1,
+    "description": "Groceries",
+    "date": "2022-01-26T14:00:00.000Z"
+  },
+  {
+    "id": 19,
+    "periodId": 1,
+    "categoryId": 3,
+    "amount": 17.9,
+    "description": "Beers",
+    "date": "2022-01-25T14:00:00.000Z"
+  },
+  {
+    "id": 18,
+    "periodId": 1,
+    "categoryId": 3,
+    "amount": 7.9,
+    "description": "Snack",
+    "date": "2022-01-22T14:00:00.000Z"
+  },
+  {
+    "id": 17,
+    "periodId": 1,
+    "categoryId": 1,
+    "amount": 19.9,
+    "description": "Phone",
+    "date": "2022-01-20T15:00:00.000Z"
+  },
+  {
+    "id": 16,
+    "periodId": 1,
+    "categoryId": 4,
+    "amount": 14.99,
+    "description": "Xbox Game Pass",
+    "date": "2022-01-20T14:30:00.000Z"
+  },
+  {
+    "id": 15,
+    "periodId": 1,
+    "categoryId": 3,
+    "amount": 21.4,
+    "description": "Snacks",
+    "date": "2022-01-20T14:00:00.000Z"
+  },
+  {
+    "id": 14,
+    "periodId": 1,
+    "categoryId": 3,
+    "amount": 49.3,
+    "description": "Eating out",
+    "date": "2022-01-19T14:00:00.000Z"
+  },
+  {
+    "id": 13,
+    "periodId": 1,
+    "categoryId": 1,
+    "amount": 311.7,
+    "description": "Electricity",
+    "date": "2022-01-18T14:00:00.000Z"
+  },
+  {
+    "id": 12,
+    "periodId": 1,
+    "categoryId": 3,
+    "amount": 95.19,
+    "description": "Groceries",
+    "date": "2022-01-15T14:30:00.000Z"
+  },
+  {
+    "id": 11,
+    "periodId": 1,
+    "categoryId": 4,
+    "amount": 12.99,
+    "description": "Youtube Premium",
+    "date": "2022-01-15T14:00:00.000Z"
+  },
+  {
+    "id": 10,
+    "periodId": 1,
+    "categoryId": 3,
+    "amount": 66.9,
+    "description": "Groceries",
+    "date": "2022-01-11T14:30:00.000Z"
   },
   {
     "id": 9,
-    "amount": 11.8,
-    "description": "Beers",
-    "timestamp": "12.02.2022",
-    "categoryId": 3
+    "periodId": 1,
+    "categoryId": 4,
+    "amount": 15.99,
+    "description": "Netflix",
+    "date": "2022-01-11T14:00:00.000Z"
   },
   {
     "id": 8,
-    "amount": 15.99,
-    "description": "Netflix",
-    "timestamp": "11.02.2022",
-    "categoryId": 4
+    "periodId": 1,
+    "categoryId": 3,
+    "amount": 22.1,
+    "description": "Beers",
+    "date": "2022-01-10T14:00:00.000Z"
   },
   {
     "id": 7,
-    "amount": 33.2,
-    "description": "Home insurance",
-    "timestamp": "09.02.2022",
-    "categoryId": 1
+    "periodId": 1,
+    "categoryId": 1,
+    "amount": 82.4,
+    "description": "Car insurance",
+    "date": "2022-01-08T14:00:00.000Z"
   },
   {
     "id": 6,
-    "amount": 100.0,
+    "periodId": 1,
+    "categoryId": 5,
+    "amount": 120.0,
     "description": "Gas",
-    "timestamp": "06.02.2022",
-    "categoryId": 5
+    "date": "2022-01-07T14:00:00.000Z"
   },
   {
     "id": 5,
+    "periodId": 1,
+    "categoryId": 6,
     "amount": 170.0,
     "description": "Moneyzzz",
-    "timestamp": "05.02.2022",
-    "categoryId": 6
+    "date": "2022-01-06T14:00:00.000Z"
   },
   {
     "id": 4,
-    "amount": 71.32,
+    "periodId": 1,
+    "categoryId": 3,
+    "amount": 91.0,
     "description": "Groceries",
-    "timestamp": "05.02.2022",
-    "categoryId": 3
+    "date": "2022-01-04T14:30:00.000Z"
   },
   {
     "id": 3,
+    "periodId": 1,
+    "categoryId": 1,
     "amount": 168.9,
     "description": "Housing util.",
-    "timestamp": "04.02.2022",
-    "categoryId": 1
+    "date": "2022-01-04T14:00:00.000Z"
   },
   {
     "id": 2,
+    "periodId": 1,
+    "categoryId": 2,
     "amount": 128.0,
     "description": "Student loan",
-    "timestamp": "01.02.2022",
-    "categoryId": 2
+    "date": "2022-01-01T14:30:00.000Z"
   },
   {
     "id": 1,
+    "periodId": 1,
+    "categoryId": 2,
     "amount": 788.0,
     "description": "Mortgage",
-    "timestamp": "01.02.2022",
-    "categoryId": 2
+    "date": "2022-01-01T14:00:00.000Z"
   }
 ]

@@ -1,32 +1,50 @@
 [
   {
     "id": 1,
+    "vaultId": 1,
     "name": "Utilities",
-    "budget": 500
+    "description": "Housing, electricity, water, communication...",
+    "baseBudget": 500,
+    "color": 1
   },
   {
     "id": 2,
+    "vaultId": 1,
     "name": "Loans",
-    "budget": 900
+    "description": "Mortgage, student loans, etc.",
+    "baseBudget": 900,
+    "color": 2
   },
   {
     "id": 3,
+    "vaultId": 1,
     "name": "Living",
-    "budget": 600
+    "description": "Groceries, eating out, alcohol, small shoppings...",
+    "baseBudget": 600,
+    "color": 3
   },
   {
     "id": 4,
+    "vaultId": 1,
     "name": "Subscriptions",
-    "budget": 60
+    "description": "Netflix etc.",
+    "baseBudget": 60,
+    "color": 4
   },
   {
     "id": 5,
+    "vaultId": 1,
     "name": "Transportation",
-    "budget": 150
+    "description": "Gas, car upkeep, bus fares/card.",
+    "baseBudget": 150,
+    "color": 5
   },
   {
     "id": 6,
+    "vaultId": 1,
     "name": "Vacation fund",
-    "budget": 170
+    "description": "Our funny money.",
+    "baseBudget": 170,
+    "color": 6
   }
 ]

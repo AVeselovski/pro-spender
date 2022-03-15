@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "users": [1, 2],
+    "name": "Talvikki household",
+    "currency": "EUR"
+  }
+]

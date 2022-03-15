@@ -1,7 +1,12 @@
+import { NavLink } from "react-router-dom";
+
 import { useAppSelector } from "app/store";
 import { selectExpenses } from "app/expenses/expenses.selector";
 
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -17,13 +22,13 @@ interface TitleProps {
 export function Title(props: TitleProps) {
   return (
     <Typography
-      color="primary"
+      color="text"
       component="h2"
       gutterBottom
       sx={{
         alignItems: "center",
         display: "flex",
-        pl: 2,
+        mb: 0,
       }}
       variant="h6"
     >
@@ -36,9 +41,29 @@ function ExpensesTable() {
   const expenses = useAppSelector((state) => selectExpenses(state, 5));
 
   return (
-    <TableContainer>
-      <Title>Latest expenses</Title>
-      <Table aria-label="A table of expenses" size="small" sx={{ minWidth: 650 }}>
+    <TableContainer
+      component={Paper}
+      sx={{
+        px: 0,
+        py: 2,
+        display: "flex",
+        flexDirection: "column",
+      }}
+      variant="outlined"
+    >
+      <Box
+        sx={{
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-between",
+          mb: 1,
+          px: 2,
+        }}
+      >
+        <Title>Latest expenses</Title>
+        <Button size="small">+ Add</Button>
+      </Box>
+      <Table aria-label="A table of expenses" size="medium">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
@@ -48,8 +73,20 @@ function ExpensesTable() {
           </TableRow>
         </TableHead>
         <TableBody>
+          {!expenses.length && (
+            <TableRow>
+              <TableCell align="center" colSpan={4}>
+                <Typography
+                  variant="body1"
+                  sx={{ color: "text.secondary", fontWeight: "fontWeightMedium" }}
+                >
+                  Looks empty!
+                </Typography>
+              </TableCell>
+            </TableRow>
+          )}
           {expenses.map((row, i) => (
-            <TableRow key={i} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+            <TableRow key={i}>
               <TableCell component="th" scope="row">
                 {row.date}
               </TableCell>
@@ -59,18 +96,22 @@ function ExpensesTable() {
               <TableCell component="th" scope="row">
                 {row.category}
               </TableCell>
-              <TableCell align="right" component="th" scope="row" sx={{ color: "red" }}>
+              <TableCell align="right" component="th" scope="row" sx={{ color: "error.main" }}>
                 {row.amount}
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Typography align="center" sx={{ fontSize: 14, mt: 3 }}>
-        <Link color="primary" href="#" onClick={(e) => e.preventDefault()} sx={{ mt: 30 }}>
-          Show more...
-        </Link>
-      </Typography>
+      <Link
+        align="right"
+        color="primary"
+        component={NavLink}
+        sx={{ display: "block", fontWeight: "fontWeightMedium", mr: 2, mt: 2 }}
+        to="/expenses"
+      >
+        Show more...
+      </Link>
     </TableContainer>
   );
 }

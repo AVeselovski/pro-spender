@@ -5,49 +5,45 @@ import * as categoriesAction from "app/categories/categories.action";
 import * as expensesAction from "app/expenses/expenses.action";
 
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 
+import Summary from "./components/Summary";
 import ExpensesTable from "./components/ExpensesTable";
+import BudgetTotal from "./components/BudgetTotal";
 import BudgetAllocation from "./components/BudgetAllocation";
+import AddExpenseAction from "views/components/general/AddExpenseAction";
 
 function Dashboard() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(categoriesAction.requestCategories());
-    dispatch(expensesAction.requestExpenses());
+    dispatch(expensesAction.requestExpensesByPeriod());
   }, [dispatch]);
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} md={12} lg={8}>
-        <Paper
-          sx={{
-            px: 0,
-            py: 2,
-            display: "flex",
-            flexDirection: "column",
-            height: 320,
-          }}
-        >
-          <ExpensesTable />
-        </Paper>
+    <>
+      <Grid container mb={1} spacing={3}>
+        <Grid item xs={12} sm={12} md={6} lg={7}>
+          <Summary />
+        </Grid>
+
+        <Grid item xs={12} sm={12} md={6} lg={5}>
+          <BudgetTotal />
+        </Grid>
       </Grid>
 
-      <Grid item xs={12} md={12} lg={4}>
-        <Paper
-          sx={{
-            px: 2,
-            py: 2,
-            display: "flex",
-            flexDirection: "column",
-            // height: 320,
-          }}
-        >
+      <Grid container mb={1} spacing={3} sx={{ pb: 8 }}>
+        <Grid item xs={12} sm={12} md={6} lg={7}>
+          <ExpensesTable />
+        </Grid>
+
+        <Grid item xs={12} sm={7} md={6} lg={5}>
           <BudgetAllocation />
-        </Paper>
+        </Grid>
       </Grid>
-    </Grid>
+
+      <AddExpenseAction />
+    </>
   );
 }
 
