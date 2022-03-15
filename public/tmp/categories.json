@@ -5,6 +5,7 @@
     "name": "Utilities",
     "description": "Housing, electricity, water, communication...",
     "baseBudget": 500,
+    "budget": 500,
     "color": 1
   },
   {
@@ -13,6 +14,7 @@
     "name": "Loans",
     "description": "Mortgage, student loans, etc.",
     "baseBudget": 900,
+    "budget": 900,
     "color": 2
   },
   {
@@ -21,6 +23,7 @@
     "name": "Living",
     "description": "Groceries, eating out, alcohol, small shoppings...",
     "baseBudget": 600,
+    "budget": 900,
     "color": 3
   },
   {
@@ -29,6 +32,7 @@
     "name": "Subscriptions",
     "description": "Netflix etc.",
     "baseBudget": 60,
+    "budget": 60,
     "color": 4
   },
   {
@@ -37,6 +41,7 @@
     "name": "Transportation",
     "description": "Gas, car upkeep, bus fares/card.",
     "baseBudget": 150,
+    "budget": 150,
     "color": 5
   },
   {
@@ -45,6 +50,7 @@
     "name": "Vacation fund",
     "description": "Our funny money.",
     "baseBudget": 170,
+    "budget": 170,
     "color": 6
   }
 ]

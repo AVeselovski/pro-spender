@@ -12,8 +12,11 @@ export default interface ICategoriesState {
 
 export interface ICategory {
   id: number;
+  vaultId: number;
   name: string;
-  budget: number;
+  description: string;
+  baseBudget: number;
+  budget: number; // !! Temporary !!
   color: number;
 }
 

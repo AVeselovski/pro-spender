@@ -119,7 +119,7 @@ function LatestInsights({ insights }: LatestInsightsProps) {
 function Summary() {
   return (
     <Box sx={{ minHeight: 170, mb: 1.5 }}>
-      <Title>February 2022</Title>
+      <Title>March 2022</Title>
 
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box>

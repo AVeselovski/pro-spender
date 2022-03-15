@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 
 import { selectCategoryNames } from "app/categories/categories.selector";
+import { formatStringDate } from "utils/dates";
 
 import type { Selector } from "reselect";
 import type { RootState } from "../store";
@@ -16,7 +17,7 @@ const _selectExpenses = (items: IExpense[], limit: number, categoryName: Partial
     const _formattedAmount = `${expense.amount.toFixed(2).toString().replace(".", ",")}€`;
 
     return {
-      date: expense.timestamp,
+      date: formatStringDate(expense.date),
       expense: expense.description,
       category: categoryName[expense.categoryId],
       amount: _formattedAmount,

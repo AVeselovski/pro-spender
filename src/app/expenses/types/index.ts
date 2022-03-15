@@ -9,10 +9,11 @@ export default interface IExpensesState {
 
 export interface IExpense {
   id: string;
+  periodId: number;
+  categoryId: number;
   amount: number;
   description: string;
-  timestamp: string;
-  categoryId: number;
+  date: string;
 }
 
 export type Sortable = "date" | "expense" | "category" | "amount";
