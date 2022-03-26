@@ -9,7 +9,8 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CategoriesGrid from "./components/CategoriesGrid";
 import Box from "@mui/material/Box";
-import AddExpenseAction from "views/components/general/AddExpenseAction";
+
+import ExpenseAdder from "views/components/expense-adder";
 
 interface TitleProps {
   children?: React.ReactNode;
@@ -55,7 +56,7 @@ function Categories() {
         <CategoriesGrid />
       </Grid>
 
-      <AddExpenseAction />
+      <ExpenseAdder />
     </>
   );
 }

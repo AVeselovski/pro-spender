@@ -85,11 +85,11 @@ function ExpensesTable() {
 
   let [, setSearchParams] = useSearchParams();
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handlePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRows(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -101,7 +101,18 @@ function ExpensesTable() {
     setSort(property);
   };
 
+  const handlePeriod = (val: string) => {
+    setPage(0);
+    setPeriod(val);
+  };
+
+  const handleCategory = (val: string) => {
+    setPage(0);
+    setCategory(val);
+  };
+
   const handleSearch = () => {
+    setPage(0);
     setQuery(queryInput);
   };
 
@@ -158,7 +169,7 @@ function ExpensesTable() {
             <Select
               displayEmpty
               id="month-select"
-              onChange={(e) => setPeriod(e.target.value)}
+              onChange={(e) => handlePeriod(e.target.value)}
               size="small"
               value={period}
             >
@@ -176,7 +187,7 @@ function ExpensesTable() {
             <Select
               displayEmpty
               id="month-select"
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={(e) => handleCategory(e.target.value)}
               size="small"
               value={selectedCategory}
             >
@@ -281,8 +292,8 @@ function ExpensesTable() {
         count={pagination.rows || 0}
         rowsPerPage={rows}
         page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
+        onPageChange={handlePage}
+        onRowsPerPageChange={handleRowsPerPage}
         sx={{ alignSelf: "center", mt: 1 }}
       />
     </Paper>

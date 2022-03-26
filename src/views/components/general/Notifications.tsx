@@ -1,5 +1,6 @@
 import React from "react";
-import { useAppSelector } from "app/store";
+import { useAppDispatch, useAppSelector } from "app/store";
+import { removeNotification } from "app/notification/notification.action";
 import { selectNotifications } from "app/notification/notification.selector";
 import { NotificationStatusEnum as Status } from "app/notification/types";
 
@@ -14,22 +15,29 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
 });
 
 interface IProps {
+  id: string;
   message: string;
   type: Status;
 }
 
-function Notification({ message = "", type = Status.Info }: IProps) {
+function Notification({ id = "", message = "", type = Status.Info }: IProps) {
+  const dispatch = useAppDispatch();
+
   return (
     <Snackbar
       anchorOrigin={{
         vertical: "top",
-        horizontal: "left",
+        horizontal: "center",
       }}
       open={true}
       autoHideDuration={5000}
-      onClose={() => {}}
+      onClose={() => dispatch(removeNotification(id))}
     >
-      <Alert onClose={() => {}} severity={type} sx={{ width: "100%" }}>
+      <Alert
+        onClose={() => dispatch(removeNotification(id))}
+        severity={type}
+        sx={{ width: "100%" }}
+      >
         {message}
       </Alert>
     </Snackbar>
@@ -46,7 +54,12 @@ function Notifications() {
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
       {notifications.map((notification: INotification) => (
-        <Notification message={notification.message} type={notification.type} />
+        <Notification
+          id={notification.id}
+          key={notification.id}
+          message={notification.message}
+          type={notification.type}
+        />
       ))}
     </Stack>
   );

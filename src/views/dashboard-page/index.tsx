@@ -10,7 +10,7 @@ import Summary from "./components/Summary";
 import ExpensesTable from "./components/ExpensesTable";
 import BudgetTotal from "./components/BudgetTotal";
 import BudgetAllocation from "./components/BudgetAllocation";
-import AddExpenseAction from "views/components/general/AddExpenseAction";
+import ExpenseAdder from "views/components/expense-adder";
 
 function Dashboard() {
   const dispatch = useAppDispatch();
@@ -42,7 +42,7 @@ function Dashboard() {
         </Grid>
       </Grid>
 
-      <AddExpenseAction />
+      <ExpenseAdder />
     </>
   );
 }

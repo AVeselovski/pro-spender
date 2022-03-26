@@ -70,9 +70,14 @@ async function fetcher(
     };
   } catch (error: any) {
     console.error(error);
+    const errorModel = new HttpErrorResponse();
     const errorMsg = error.message || responseData;
 
-    return Promise.reject(`500 | ${errorMsg}`);
+    errorModel.errors = [errorMsg];
+    errorModel.message = errorMsg;
+
+    return errorModel;
+    // return Promise.reject(`500 | ${errorMsg}`);
   }
 }
 
