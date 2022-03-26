@@ -6,36 +6,6 @@ import type { ParametricSelector } from "reselect";
 import type { RootState } from "../store";
 import type IErrorState from "./types";
 
-/**
- * Returns a new object with the keys being the finished action type
- * (e.g. "someAction/REQUEST_*_FINISHED") and the value being a
- * HttpErrorResponseModel.
- */
-export const selectRawErrors: ParametricSelector<RootState, string[], IErrorState> = createSelector(
-  (state: RootState) => state.error,
-  (_: RootState, actionTypes: string[]) => actionTypes,
-  _selectRawErrors
-);
-
-/**
- * Finds any errors matching the array of actionTypes and combines all error messages in to
- * a single string.
- */
-export const selectErrorText: ParametricSelector<RootState, string[], string> = createSelector(
-  (state: RootState) => state.error,
-  (_: RootState, actionTypes: string[]) => actionTypes,
-  _selectErrorText
-);
-
-/**
- * Returns true or false if there are errors found matching the array of actionTypes.
- */
-export const hasErrors: ParametricSelector<RootState, string[], boolean> = createSelector(
-  (state: RootState) => state.errors,
-  (_state: RootState, actionTypes: string[]) => actionTypes,
-  _hasErrors
-);
-
 function _selectRawErrors(errorState: IErrorState, actionTypes: string[]): IErrorState {
   interface PartialState {
     [key: string]: HttpErrorResponse;
@@ -51,6 +21,17 @@ function _selectRawErrors(errorState: IErrorState, actionTypes: string[]): IErro
     return partialState;
   }, {});
 }
+
+/**
+ * Returns a new object with the keys being the finished action type
+ * (e.g. "someAction/REQUEST_*_FINISHED") and the value being a
+ * HttpErrorResponseModel.
+ */
+export const selectRawErrors: ParametricSelector<RootState, string[], IErrorState> = createSelector(
+  (state: RootState) => state.error,
+  (_: RootState, actionTypes: string[]) => actionTypes,
+  _selectRawErrors
+);
 
 function _selectErrorText(errorState: IErrorState, actionTypes: string[]): string {
   const errorList: string[] = actionTypes.reduce((errorMessages: string[], actionType: string) => {
@@ -69,6 +50,25 @@ function _selectErrorText(errorState: IErrorState, actionTypes: string[]): strin
   return errorList.join(", ");
 }
 
+/**
+ * Finds any errors matching the array of actionTypes and combines all error messages in to
+ * a single string.
+ */
+export const selectErrorText: ParametricSelector<RootState, string[], string> = createSelector(
+  (state: RootState) => state.error,
+  (_: RootState, actionTypes: string[]) => actionTypes,
+  _selectErrorText
+);
+
 function _hasErrors(errorState: IErrorState, actionTypes: string[]): boolean {
   return actionTypes.map((actionType: string) => errorState[actionType]).filter(Boolean).length > 0;
 }
+
+/**
+ * Returns true or false if there are errors found matching the array of actionTypes.
+ */
+export const hasErrors: ParametricSelector<RootState, string[], boolean> = createSelector(
+  (state: RootState) => state.errors,
+  (_state: RootState, actionTypes: string[]) => actionTypes,
+  _hasErrors
+);

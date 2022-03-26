@@ -5,6 +5,7 @@ import type IExpensesState from "./types";
 
 const initialState: IExpensesState = {
   items: [],
+  pagination: { pages: 0, rows: 0 },
 };
 
 function expensesReducer(state = initialState, action: IAction<any>) {
@@ -14,7 +15,8 @@ function expensesReducer(state = initialState, action: IAction<any>) {
     case actions.REQUEST_EXPENSES_FINISHED:
       return {
         ...state,
-        items: action.payload,
+        pagination: { ...state.pagination, ...action.payload.pagination },
+        items: action.payload.items,
       };
     default:
       return state;

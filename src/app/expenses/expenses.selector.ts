@@ -1,42 +1,62 @@
 import { createSelector } from "reselect";
 
-import { selectCategoryNames } from "app/categories/categories.selector";
-import { formatStringDate } from "utils/dates";
-
-import type { Selector } from "reselect";
+import type { Selector, ParametricSelector } from "reselect";
 import type { RootState } from "../store";
 import type { IExpense } from "./types";
+import { ICategory } from "app/categories/types";
 
-interface PartialState {
-  [key: string]: string;
-}
+export const selectRawExpenses = (state: RootState) => state.expenses.items;
 
-const _selectExpenses = (items: IExpense[], limit: number, categoryName: PartialState) => {
+const _selectCategoryNames: Selector<RootState, { [key: string]: string }> = createSelector(
+  (state: RootState) => state.categories.items,
+  (items: ICategory[]) =>
+    items.reduce((obj: { [key: string]: string }, item) => {
+      obj[item.id] = item.name;
+
+      return obj;
+    }, {})
+);
+
+function _selectExpenses(
+  items: IExpense[],
+  limit: number,
+  categoryNames: { [key: string]: string }
+) {
   const slicedItems = limit ? items.slice(0, limit) : items;
   const formattedExpenses = slicedItems.map((expense) => {
-    const _formattedAmount = `${expense.amount.toFixed(2).toString().replace(".", ",")}€`;
-
     return {
-      date: formatStringDate(expense.date),
+      ...expense,
+      date: expense.date,
       expense: expense.description,
-      category: categoryName[expense.categoryId],
-      amount: _formattedAmount,
+      category: categoryNames[expense.categoryId],
+      amount: expense.amount,
     };
   });
 
   return formattedExpenses;
+}
+
+type ExpenseWithCategory = IExpense & {
+  category: string;
 };
 
-export const selectRawExpenses = (state: RootState) => state.expenses.items;
+/**
+ * Selects a set amount of expenses. All if limit not provided (0).
+ */
+export const selectExpenses: ParametricSelector<RootState, number, ExpenseWithCategory[]> =
+  createSelector(
+    (state: RootState) => state.expenses.items,
+    (_state: RootState, limit: number = 0) => limit,
+    _selectCategoryNames,
+    _selectExpenses
+  );
 
-export const selectExpenses = createSelector(
-  (state: RootState) => state.expenses.items,
-  (_state: RootState, limit: number = 0) => limit,
-  selectCategoryNames,
-  _selectExpenses
-);
+export const selectExpensesPagination = (state: RootState) => state.expenses.pagination;
 
-export const selectTotalExpenses: Selector<RootState, number> = createSelector(
+/**
+ * Calculated total of given expenses.
+ */
+export const selectExpensesTotal: Selector<RootState, number> = createSelector(
   (state: RootState) => state.expenses.items,
   (items: IExpense[]) => items.reduce((total: number, item) => (total += item.amount), 0)
 );

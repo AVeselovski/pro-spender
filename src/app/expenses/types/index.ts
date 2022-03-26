@@ -2,6 +2,7 @@
 
 /* Main default import (state), should be named for importing convenience */
 export default interface IExpensesState {
+  readonly items: IExpense[];
   readonly [key: string]: any;
 }
 

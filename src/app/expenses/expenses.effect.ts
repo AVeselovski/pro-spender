@@ -12,5 +12,6 @@ export async function fetchExpenses(params: IExpensesParams) {
     return response;
   }
 
+  // mockResponse mimics filtering and sorting done by backend
   return mockResponse(response.data, params);
 }

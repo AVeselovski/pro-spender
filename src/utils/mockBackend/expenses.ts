@@ -19,14 +19,16 @@ const PERIODS_DATA = [
 export function mockResponse(data: any, params: any) {
   const { page, rows, sort, order, ...filters } = params;
 
-  const _filtered = _uglyFilter(data, filters);
-  const _sorted = _stableSort(_filtered, _getComparator(order, sort));
-  const _paginated = _sorted.slice(
+  const filtered = _uglyFilter(data, filters);
+  const sorted = _stableSort(filtered, _getComparator(order, sort));
+  const totalPages = Math.ceil(sorted.length / rows);
+  const totalRows = sorted.length;
+  const paginated = sorted.slice(
     (Number(page) - 1) * Number(rows),
     (Number(page) - 1) * Number(rows) + Number(rows)
   );
 
-  const processedData = _paginated;
+  const processedData = { items: paginated, pagination: { pages: totalPages, rows: totalRows } };
 
   return processedData;
 }

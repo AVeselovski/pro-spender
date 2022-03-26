@@ -1,5 +1,6 @@
 import { useAppSelector } from "app/store";
 import { selectRawCategories } from "app/categories/categories.selector";
+import { formatCurrency } from "utils/numbers";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -35,7 +36,7 @@ function CategoriesGrid() {
                   {c.name}
                 </Typography>
                 <Typography color="text.secondary" variant="h4" sx={{ mt: 3, textAlign: "center" }}>
-                  {c.budget.toFixed(2).replace(".", ",")}€
+                  {formatCurrency(c.budget)}
                 </Typography>
               </CardContent>
             </CardActionArea>

@@ -1,5 +1,6 @@
 import { useAppSelector } from "app/store";
-import { selectBudgetSummary } from "app/categories/categories.selector";
+import { selectTotalBudgetSummary } from "app/categories/categories.selector";
+import { formatCurrency } from "utils/numbers";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -86,15 +87,14 @@ function MonthlyProgress({ value = 0, ...props }: CircularProgressProps) {
 }
 
 function BudgetTotal() {
-  const budgetSummary = useAppSelector((state) => selectBudgetSummary(state));
+  const budgetSummary = useAppSelector((state) => selectTotalBudgetSummary(state));
 
-  const totalExpenses = budgetSummary.totalExpenses.replace(".", ",");
-  const totalBudget = budgetSummary.totalBudget.replace(".", ",");
-  const budgetRatio = `${totalExpenses}€ / ${totalBudget}€`;
+  const expenses = budgetSummary.totalExpenses;
+  const budget = budgetSummary.totalBudget;
+  const budgetRatio = `${formatCurrency(expenses)} / ${formatCurrency(budget)}`;
 
-  const difference = budgetSummary.difference.replace(".", ",");
   const diffMsg = budgetSummary.isOver ? "over budget" : "under budget";
-  const budgetDifference = `${difference}€ ${diffMsg}`;
+  const budgetDifference = `${formatCurrency(budgetSummary.difference)} ${diffMsg}`;
 
   return (
     <Paper

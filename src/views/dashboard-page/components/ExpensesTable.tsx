@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 
 import { useAppSelector } from "app/store";
 import { selectExpenses } from "app/expenses/expenses.selector";
+import { formatStringDate } from "utils/dates";
+import { formatCurrency } from "utils/numbers";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -88,16 +90,16 @@ function ExpensesTable() {
           {expenses.map((row, i) => (
             <TableRow key={i}>
               <TableCell component="th" scope="row">
-                {row.date}
+                {formatStringDate(row.date)}
               </TableCell>
               <TableCell component="th" scope="row">
-                {row.expense}
+                {row.description}
               </TableCell>
               <TableCell component="th" scope="row">
                 {row.category}
               </TableCell>
               <TableCell align="right" component="th" scope="row" sx={{ color: "error.main" }}>
-                {row.amount}
+                {formatCurrency(row.amount)}
               </TableCell>
             </TableRow>
           ))}

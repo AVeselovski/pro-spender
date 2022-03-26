@@ -22,16 +22,14 @@ export interface ICategory {
 
 export interface ICategoryWithExpenses extends ICategory {
   expenses: IExpense[];
-  rawSum: number;
-  sum: string;
-  rawPercentage: number;
-  percentage: string;
+  sum: number;
+  percentage: number;
 }
 
 export interface IBudgetSummary {
-  totalBudget: string;
-  totalExpenses: string;
-  difference: string;
+  totalBudget: number;
+  totalExpenses: number;
+  difference: number;
   isOver: boolean;
   percentage: number;
 }

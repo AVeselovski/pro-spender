@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 
 import { useAppSelector } from "app/store";
 import { selectCategoriesWithExpenses } from "app/categories/categories.selector";
+import { formatCurrency, formatPercentage } from "utils/numbers";
 
 import { styled, Theme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -48,8 +49,6 @@ const BorderLinearProgress = styled(LinearProgress, {
 
 function BudgetAllocation() {
   const budgetAllocationItems = useAppSelector((state) => selectCategoriesWithExpenses(state));
-
-  console.log(budgetAllocationItems);
 
   const getBarWidth = (val: number) => {
     if (val > 100) return 100;
@@ -101,17 +100,18 @@ function BudgetAllocation() {
               </Typography>
               <Typography
                 sx={{
-                  color: item.rawPercentage > 100 ? "error.main" : "text.primary",
+                  color: item.percentage > 100 ? "error.main" : "text.primary",
                 }}
                 variant="body2"
               >
-                {item.sum}€ / {item.budget}€ ({item.percentage}%)
+                {formatCurrency(item.sum)} / {formatCurrency(item.budget)} (
+                {formatPercentage(item.percentage)})
               </Typography>
             </Box>
             <BorderLinearProgress
-              overflow={item.rawPercentage > 100}
+              overflow={item.percentage > 100}
               variant="determinate"
-              value={getBarWidth(item.rawPercentage || 0)}
+              value={getBarWidth(item.percentage || 0)}
             />
           </Box>
         ))}

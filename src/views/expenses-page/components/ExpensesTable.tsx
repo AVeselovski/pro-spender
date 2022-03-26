@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createSearchParams, useSearchParams } from "react-router-dom";
+
 import { useAppSelector } from "app/store";
 import { selectCategoryNames } from "app/categories/categories.selector";
-import { selectExpenses } from "app/expenses/expenses.selector";
+import { selectExpenses, selectExpensesPagination } from "app/expenses/expenses.selector";
+import { formatStringDate } from "utils/dates";
+import { formatCurrency } from "utils/numbers";
 
+import useDebounce from "views/components/hooks/useDebounce";
 import Box from "@mui/material/Box";
-// import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -65,38 +69,69 @@ const headCells: readonly HeadCell[] = [
 
 function ExpensesTable() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [orderBy, setOrderBy] = useState<Sortable>("date");
+  const [rows, setRows] = useState(10);
+  const [sort, setSort] = useState<Sortable>("date");
   const [order, setOrder] = useState<Order>("desc");
-  const [month, setMonth] = useState(MONTHS[0].value);
-  const [selectedCategory, setCategory] = useState("all");
+  const [period, setPeriod] = useState(MONTHS[0].value);
+  const [selectedCategory, setCategory] = useState("");
+  const [query, setQuery] = useState("");
+  const [queryInput, setQueryInput] = useState("");
+
+  const queryRef = useRef<HTMLInputElement>();
 
   const categories = useAppSelector((state) => selectCategoryNames(state));
-  const expenses = useAppSelector((state) => selectExpenses(state));
+  const expenses = useAppSelector((state) => selectExpenses(state, 0));
+  const pagination = useAppSelector((state) => selectExpensesPagination(state));
+
+  let [, setSearchParams] = useSearchParams();
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
-
-    // call API
   };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRows(parseInt(event.target.value, 10));
     setPage(0);
-
-    // call API
   };
 
-  const handleRequestSort = (property: Sortable) => {
-    const isAsc = orderBy === property && order === "asc";
+  const handleSort = (property: Sortable) => {
+    const isAsc = sort === property && order === "asc";
+
     setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
-
-    // call API
+    setSort(property);
   };
+
+  const handleSearch = () => {
+    setQuery(queryInput);
+  };
+
+  // Allow for instant "enter" key search.
+  const handleSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleSearch();
+  };
+
+  // Delay setting url params (and calling API) to minimize unnecessary calls.
+  useDebounce(handleSearch, 500, [queryInput]);
+
+  // Actively track filters state changes and apply url params.
+  useEffect(() => {
+    setSearchParams(
+      createSearchParams({
+        page: (page + 1).toString(),
+        rows: rows.toString(),
+        sort,
+        order,
+        period,
+        category: selectedCategory,
+        q: query,
+      })
+    );
+  }, [setSearchParams, page, rows, sort, order, period, selectedCategory, query]);
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - expenses.length) : 0;
+  // const emptyRows =
+  //   page === pagination.pages - 1 ? Math.max(0, (1 + page) * rows - pagination.rows) : 0;
 
   return (
     <Paper
@@ -121,11 +156,13 @@ function ExpensesTable() {
           <FormControl sx={{ mr: 2, width: 150 }}>
             <FormLabel htmlFor="month-select">Month</FormLabel>
             <Select
+              displayEmpty
               id="month-select"
-              onChange={(e) => setMonth(e.target.value)}
+              onChange={(e) => setPeriod(e.target.value)}
               size="small"
-              value={month}
+              value={period}
             >
+              <MenuItem value="">All</MenuItem>
               {MONTHS.map((m) => (
                 <MenuItem key={m.value} value={m.value}>
                   {m.label}
@@ -137,12 +174,13 @@ function ExpensesTable() {
           <FormControl sx={{ width: 250 }}>
             <FormLabel htmlFor="month-select">Category</FormLabel>
             <Select
+              displayEmpty
               id="month-select"
               onChange={(e) => setCategory(e.target.value)}
               size="small"
               value={selectedCategory}
             >
-              <MenuItem value="all">All</MenuItem>
+              <MenuItem value="">All</MenuItem>
               {Object.keys(categories).map((key) => (
                 <MenuItem key={key} value={key}>
                   {categories[key]}
@@ -151,20 +189,25 @@ function ExpensesTable() {
             </Select>
           </FormControl>
         </Box>
-        <TextField
-          id="expense-search"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment disablePointerEvents position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-          placeholder="Search expense..."
-          size="small"
-          sx={{ width: 310 }}
-          type="search"
-        />
+        <form onSubmit={handleSubmitSearch}>
+          <TextField
+            id="expense-search"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment disablePointerEvents position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            onChange={(e) => setQueryInput(e.target.value)}
+            placeholder="Search expense..."
+            inputRef={queryRef}
+            size="small"
+            sx={{ width: 310 }}
+            type="search"
+            value={queryInput}
+          />
+        </form>
       </Box>
       <TableContainer>
         <Table aria-label="A table of expenses" size="medium" sx={{ minWidth: 650 }}>
@@ -174,15 +217,15 @@ function ExpensesTable() {
                 <TableCell
                   align={cell.isNumeric ? "right" : "left"}
                   key={cell.id}
-                  sortDirection={orderBy === cell.id ? order : false}
+                  sortDirection={sort === cell.id ? order : false}
                 >
                   <TableSortLabel
-                    active={orderBy === cell.id}
-                    direction={orderBy === cell.id ? order : "asc"}
-                    onClick={() => handleRequestSort(cell.id)}
+                    active={sort === cell.id}
+                    direction={sort === cell.id ? order : "asc"}
+                    onClick={() => handleSort(cell.id)}
                   >
                     {cell.label}
-                    {orderBy === cell.id ? (
+                    {sort === cell.id ? (
                       <Box component="span" sx={visuallyHidden}>
                         {order === "desc" ? "sorted descending" : "sorted ascending"}
                       </Box>
@@ -196,13 +239,13 @@ function ExpensesTable() {
             {expenses.map((row, i) => (
               <TableRow key={i}>
                 <TableCell component="th" scope="row" width={170}>
-                  {row.date}
+                  {formatStringDate(row.date)}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {row.category}
                 </TableCell>
                 <TableCell component="th" scope="row" width={200}>
-                  {row.expense}
+                  {row.description}
                 </TableCell>
                 <TableCell
                   align="right"
@@ -211,12 +254,13 @@ function ExpensesTable() {
                   sx={{ color: "red" }}
                   width={140}
                 >
-                  {row.amount}
+                  {formatCurrency(row.amount)}
                 </TableCell>
               </TableRow>
             ))}
 
             {/* Avoid a layout jump when reaching the last page with empty rows. */}
+            {/* 
             {emptyRows > 0 && (
               <TableRow
                 style={{
@@ -225,7 +269,8 @@ function ExpensesTable() {
               >
                 <TableCell colSpan={6} />
               </TableRow>
-            )}
+            )} 
+            */}
           </TableBody>
         </Table>
       </TableContainer>
@@ -233,8 +278,8 @@ function ExpensesTable() {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={expenses.length || 0}
-        rowsPerPage={rowsPerPage}
+        count={pagination.rows || 0}
+        rowsPerPage={rows}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}

@@ -7,16 +7,16 @@ import type { AppDispatch, RootState } from "../store";
 import type { IExpensesParams } from "./types";
 
 function getUrlParams(urlParams: URLSearchParams) {
-  const _params: { [key: string]: any } = new ExpensesUrlParams();
   const _urlParams: Partial<IExpensesParams> = Object.fromEntries([...urlParams]);
+  const params: { [key: string]: any } = new ExpensesUrlParams();
 
-  Object.keys(_params).forEach((key) => {
+  Object.keys(params).forEach((key) => {
     if (_urlParams[key as keyof IExpensesParams]) {
-      _params[key] = _urlParams[key as keyof IExpensesParams];
+      params[key] = _urlParams[key as keyof IExpensesParams];
     }
   });
 
-  return { ..._params } as IExpensesParams;
+  return { ...params } as IExpensesParams;
 }
 
 function withParams(params?: { [key: string]: string }) {
@@ -51,11 +51,12 @@ export function requestExpensesByPeriod(period?: string): any {
   return async (dispatch: AppDispatch, getState: RootState) => {
     dispatch(actionCreator.createAction(REQUEST_EXPENSES));
 
-    const _date = period ? new Date(period) : new Date();
-    const _period = _date.toISOString().split("T")[0];
+    const date = period ? new Date(period) : new Date();
+    const _period = date.toISOString().split("T")[0];
 
     const dataModel = await effect.fetchExpenses(
-      withParams({ period: _period, page: "1", rows: "9000" }) // to get all rows for calculations (no backend yet)
+      // to get all rows of period (no backend yet)
+      withParams({ period: _period, page: "1", rows: "9000" })
     );
     const isError = dataModel instanceof HttpErrorResponse;
 
