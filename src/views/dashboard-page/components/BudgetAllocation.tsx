@@ -92,11 +92,21 @@ function BudgetAllocation() {
             >
               <Typography
                 sx={{
-                  color: "text.primary",
+                  color: item.percentage > 100 ? "error.main" : "text.primary",
                 }}
-                variant="subtitle2"
+                variant="body2"
               >
-                {item.name}
+                <Typography
+                  component="span"
+                  sx={{
+                    color: "text.primary",
+                    mr: 1,
+                  }}
+                  variant="subtitle2"
+                >
+                  {item.name}
+                </Typography>
+                {formatCurrency(item.sum)} ({formatPercentage(item.percentage)})
               </Typography>
               <Typography
                 sx={{
@@ -104,8 +114,8 @@ function BudgetAllocation() {
                 }}
                 variant="body2"
               >
-                {formatCurrency(item.sum)} / {formatCurrency(item.budget)} (
-                {formatPercentage(item.percentage)})
+                {formatCurrency(item.budget - item.sum)}{" "}
+                {item.percentage <= 100 && `(${formatPercentage(100 - item.percentage)})`}
               </Typography>
             </Box>
             <BorderLinearProgress

@@ -52,7 +52,9 @@ function _uglyFilter(data: any, filters: any) {
   }
 
   if (filters.q) {
-    expenses = expenses.filter((ex: any) => ex.description.toLowerCase().includes(filters.q));
+    expenses = expenses.filter((ex: any) =>
+      ex.description.toLowerCase().includes(filters.q.toLowerCase())
+    );
   }
 
   return expenses;

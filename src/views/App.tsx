@@ -17,7 +17,7 @@ function App() {
     setIsOpen((val) => !val);
   };
 
-  console.log(mdTheme);
+  // console.log(mdTheme);
 
   return (
     <ThemeProvider theme={mdTheme}>
