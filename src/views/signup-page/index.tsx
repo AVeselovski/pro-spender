@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { useAppDispatch } from "app/store";
 import { signup } from "app/user/user.action";

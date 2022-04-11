@@ -41,46 +41,46 @@ function Title(props: TitleProps) {
   );
 }
 
-const StyledInsights = styled(Box)(({ theme }) => ({
-  marginBottom: 0,
-  paddingLeft: "20px",
-  position: "relative",
-  "&::before": {
-    backgroundColor: "#ccc",
-    content: '""',
-    position: "absolute",
-    height: "70%",
-    left: "3px",
-    top: "15%",
-    width: "3px",
-  },
-  "> *:first-of-type": {
-    color: theme.palette.text.primary,
-    fontWeight: theme.typography.fontWeightMedium,
-    paddingLeft: 0,
-    "::before": {
-      backgroundColor: "#ccc",
-      borderRadius: "50%",
-      content: '""',
-      position: "absolute",
-      height: "9px",
-      left: "0px",
-      width: "9px",
-    },
-  },
-  "> *:last-child": {
-    fontWeight: theme.typography.fontWeightMedium,
-    "::before": {
-      backgroundColor: "#ccc",
-      borderRadius: "50%",
-      content: '""',
-      position: "absolute",
-      height: "9px",
-      left: "0px",
-      width: "9px",
-    },
-  },
-}));
+// const StyledInsights = styled(Box)(({ theme }) => ({
+//   marginBottom: 0,
+//   paddingLeft: "20px",
+//   position: "relative",
+//   "&::before": {
+//     backgroundColor: "#ccc",
+//     content: '""',
+//     position: "absolute",
+//     height: "70%",
+//     left: "3px",
+//     top: "15%",
+//     width: "3px",
+//   },
+//   "> *:first-of-type": {
+//     color: theme.palette.text.primary,
+//     fontWeight: theme.typography.fontWeightMedium,
+//     paddingLeft: 0,
+//     "::before": {
+//       backgroundColor: "#ccc",
+//       borderRadius: "50%",
+//       content: '""',
+//       position: "absolute",
+//       height: "9px",
+//       left: "0px",
+//       width: "9px",
+//     },
+//   },
+//   "> *:last-child": {
+//     fontWeight: theme.typography.fontWeightMedium,
+//     "::before": {
+//       backgroundColor: "#ccc",
+//       borderRadius: "50%",
+//       content: '""',
+//       position: "absolute",
+//       height: "9px",
+//       left: "0px",
+//       width: "9px",
+//     },
+//   },
+// }));
 
 const StyledTimeline = styled(Timeline)(({ theme }) => ({}));
 
