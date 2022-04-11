@@ -40,7 +40,7 @@ function Categories() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(categoriesAction.requestCategories());
+    dispatch(categoriesAction.getCategories());
   }, [dispatch]);
 
   return (

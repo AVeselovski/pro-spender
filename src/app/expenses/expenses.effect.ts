@@ -4,7 +4,7 @@ import HttpErrorResponse from "models/HttpErrorResponse";
 
 import type { IExpense, IExpensesParams } from "./types";
 
-export async function fetchExpenses(params: IExpensesParams) {
+export async function getExpenses(params: IExpensesParams) {
   const endpoint = `tmp/expenses.json`;
   const response = await fetcher.get(endpoint);
 
@@ -17,7 +17,7 @@ export async function fetchExpenses(params: IExpensesParams) {
   // return response.data;
 }
 
-export async function postExpense(expense: Partial<IExpense>) {
+export async function addExpense(expense: Partial<IExpense>) {
   const endpoint = `tmp/expenses.json`;
   // const response = await fetcher.post(endpoint, expense);
   /* mocking successful/failed requests */

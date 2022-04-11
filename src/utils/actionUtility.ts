@@ -6,10 +6,5 @@ export const createAction = (
 ) => ({ type, payload, error, meta });
 
 export const isAsyncActionType = (type: string) => {
-  return (
-    type.includes("REQUEST_") ||
-    type.includes("POST_") ||
-    type.includes("PUT_") ||
-    type.includes("DELETE_")
-  );
+  return type.includes("ASYNC_");
 };

@@ -16,8 +16,8 @@ function Dashboard() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(categoriesAction.requestCategories());
-    dispatch(expensesAction.requestExpensesByPeriod());
+    dispatch(categoriesAction.getCategories());
+    dispatch(expensesAction.getExpensesByPeriod());
   }, [dispatch]);
 
   return (

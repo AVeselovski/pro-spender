@@ -5,8 +5,6 @@ import type { RootState } from "../store";
 import type { IBudgetSummary, ICategory, ICategoryWithExpenses } from "./types";
 import type { IExpense } from "../expenses/types";
 
-export const selectRawCategories = (state: RootState) => state.categories.items;
-
 function _selectCategoriesWithExpenses({
   categories,
   expenses,
@@ -37,6 +35,8 @@ function _selectCategoriesWithExpenses({
 
   return categoriesWithExpenses;
 }
+
+export const selectRawCategories = (state: RootState) => state.categories.items;
 
 /**
  * Selects categories with all expenses and expenses summary (sum, percentage).

@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import store from "app/store";
 
-import App from "./App";
+import App from "views/App";
 
 test("renders app", () => {
   render(

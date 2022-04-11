@@ -1,9 +1,10 @@
 import { forwardRef, useEffect, useState } from "react";
+import { styled } from "@mui/material";
 
 import { useAppDispatch, useAppSelector } from "app/store";
 import { selectCategoryNames } from "app/categories/categories.selector";
 import { selectLoadingStates } from "app/processing/processing.selector";
-import { addExpense, POST_EXPENSE } from "app/expenses/expenses.action";
+import { addExpense, ASYNC_ADD_EXPENSE } from "app/expenses/expenses.action";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -24,6 +25,15 @@ import TextField from "@mui/material/TextField";
 
 import CloseRounded from "@mui/icons-material/CloseRounded";
 
+const CustomDialog = styled(Dialog)`
+  .MuiDialog-paper {
+    border-radius: 1rem;
+    margin-bottom: 0;
+    margin-top: 4rem;
+    max-height: calc(100%);
+  }
+`;
+
 function ExpenseModal({ isOpen = false, handleClose = () => {} }) {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -31,7 +41,7 @@ function ExpenseModal({ isOpen = false, handleClose = () => {} }) {
 
   const dispatch = useAppDispatch();
 
-  const loading = useAppSelector((state) => selectLoadingStates(state, [POST_EXPENSE]));
+  const loading = useAppSelector((state) => selectLoadingStates(state, [ASYNC_ADD_EXPENSE]));
   const categories = useAppSelector((state) => selectCategoryNames(state));
 
   const lastUsed = "1"; // NOTE: will be pulling from local storage (should persist locally)
@@ -60,16 +70,24 @@ function ExpenseModal({ isOpen = false, handleClose = () => {} }) {
   useEffect(() => setCategory(lastUsed), [lastUsed]);
 
   return (
-    <Dialog
+    <CustomDialog
       aria-labelledby="expense-modal-title"
       aria-describedby="expense-modal-description"
       closeAfterTransition
-      // keepMounted
+      keepMounted
       onClose={_handleClose}
       open={isOpen}
+      sx={{ marginTop: "4rem" }}
       TransitionComponent={Transition}
     >
-      <Box sx={{ alignItems: "center", display: "flex", justifyContent: "space-between", pr: 2 }}>
+      <Box
+        sx={{
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-between",
+          pr: 2,
+        }}
+      >
         <DialogTitle>Add Expense</DialogTitle>
         <IconButton onClick={_handleClose}>
           <CloseRounded />
@@ -132,7 +150,8 @@ function ExpenseModal({ isOpen = false, handleClose = () => {} }) {
           </LoadingButton>
         </DialogActions>
       </form>
-    </Dialog>
+      <Box sx={{ height: "100vh" }} />
+    </CustomDialog>
   );
 }
 

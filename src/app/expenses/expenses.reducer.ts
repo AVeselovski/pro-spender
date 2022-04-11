@@ -12,7 +12,7 @@ function expensesReducer(state = initialState, action: IAction<any>) {
   if (action.error) return state;
 
   switch (action.type) {
-    case actions.REQUEST_EXPENSES_FINISHED:
+    case actions.ASYNC_GET_EXPENSES_FINISHED:
       return {
         ...state,
         pagination: { ...state.pagination, ...action.payload.pagination },

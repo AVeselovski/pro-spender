@@ -38,11 +38,11 @@ function Expenses() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(categoriesAction.requestCategories());
+    dispatch(categoriesAction.getCategories());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(expensesAction.requestExpenses(searchParams));
+    dispatch(expensesAction.getExpenses(searchParams));
   }, [dispatch, searchParams]);
 
   return (

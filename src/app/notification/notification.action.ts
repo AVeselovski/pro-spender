@@ -5,7 +5,7 @@ import * as actionCreator from "utils/actionUtility";
 import type { IAction } from "../types";
 import type { INotification, NotificationStatusEnum } from "./types";
 
-export const ADD_NOTIFICATION: string = "notification/ADD";
+export const ADD_NOTIFICATION: string = "notification/ADD_NOTIFICATION";
 
 export function addNotification(
   message: string,
@@ -20,7 +20,7 @@ export function addNotification(
   return actionCreator.createAction(ADD_NOTIFICATION, notification);
 }
 
-export const REMOVE_NOTIFICATION: string = "notification/REMOVE";
+export const REMOVE_NOTIFICATION: string = "notification/REMOVE_NOTIFICATION";
 
 export function removeNotification(id: string): IAction<string> {
   return actionCreator.createAction(REMOVE_NOTIFICATION, id);

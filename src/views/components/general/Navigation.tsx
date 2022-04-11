@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
@@ -19,6 +20,8 @@ import CategoryIcon from "@mui/icons-material/CategoryRounded";
 import ExpenseIcon from "@mui/icons-material/ListAltRounded";
 import MenuIcon from "@mui/icons-material/MenuRounded";
 import PersonIcon from "@mui/icons-material/PersonRounded";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 const drawerWidth: number = 240;
 
@@ -105,7 +108,19 @@ interface NavigationProps {
 }
 
 function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
   const location = useLocation();
+
+  const isUserMenuOpen = Boolean(anchorEl);
+
+  const handleUserMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleUserMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <>
@@ -133,11 +148,33 @@ function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
           <Typography component="h1" noWrap sx={{ flexGrow: 1 }} variant="h6">
             {getLocationName(location.pathname)}
           </Typography>
-          <IconButton aria-label="user" color="inherit" size="large" sx={{ ml: 2 }}>
+          <IconButton
+            aria-controls={isUserMenuOpen ? "basic-menu" : undefined}
+            aria-expanded={isUserMenuOpen ? "true" : undefined}
+            aria-haspopup="true"
+            aria-label="user"
+            color="inherit"
+            size="large"
+            id="user-menu-button"
+            onClick={handleUserMenuClick}
+            sx={{ ml: 2 }}
+          >
             <PersonIcon fontSize="medium" />
           </IconButton>
+          <Menu
+            id="user-menu"
+            anchorEl={anchorEl}
+            open={isUserMenuOpen}
+            onClose={handleUserMenuClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={handleUserMenuClose}>Logout</MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
+
       <Drawer open={isOpen} variant="permanent">
         <DrawerHeader>
           <IconButton onClick={toggleDrawer}>
@@ -146,19 +183,19 @@ function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItemButton component={NavLink} to="/">
+          <ListItemButton component={NavLink} to="/1">
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
           </ListItemButton>
-          <ListItemButton component={NavLink} to="/categories">
+          <ListItemButton component={NavLink} to="/1/categories">
             <ListItemIcon>
               <CategoryIcon />
             </ListItemIcon>
             <ListItemText primary="Categories" />
           </ListItemButton>
-          <ListItemButton component={NavLink} to="/expenses">
+          <ListItemButton component={NavLink} to="/1/expenses">
             <ListItemIcon>
               <ExpenseIcon />
             </ListItemIcon>

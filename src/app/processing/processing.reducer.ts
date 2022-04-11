@@ -12,12 +12,12 @@ function processingReducer(state = initialState, action: IAction<undefined>): IP
     return state;
   }
 
-  const isFinishedRequestType = action.type.includes("_FINISHED");
-  const requestName = action.type.replace("_FINISHED", "");
+  const isFinishedType = action.type.includes("_FINISHED");
+  const actionType = action.type.replace("_FINISHED", "");
 
   return {
     ...state,
-    [requestName]: !isFinishedRequestType,
+    [actionType]: !isFinishedType,
   };
 }
 

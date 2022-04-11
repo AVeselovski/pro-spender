@@ -1,9 +1,9 @@
-import { requestExpenses, requestExpensesByPeriod, addExpense } from "app/expenses/expenses.action";
+import { getExpenses, getExpensesByPeriod, addExpense } from "app/expenses/expenses.action";
 
 describe("expenses.action", () => {
-  test("requestExpenses should...", async () => {});
+  test("getExpenses should...", async () => {});
 
-  test("requestExpensesById should...", async () => {});
+  test("getExpensesById should...", async () => {});
 
   test("addExpense should...", async () => {});
 });

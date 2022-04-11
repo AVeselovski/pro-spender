@@ -101,7 +101,7 @@ function BudgetTotal() {
       sx={{
         alignItems: "center",
         display: "flex",
-        minHeight: 170,
+        minHeight: 180,
         justifyContent: "center",
         mb: 2,
         px: 2,

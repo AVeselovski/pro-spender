@@ -1,5 +1,5 @@
-import { fetchCategories } from "app/categories/categories.effect";
+import { getCategories } from "app/categories/categories.effect";
 
 describe("categories.selector", () => {
-  test("fetchCategories should...", async () => {});
+  test("getCategories should...", async () => {});
 });
