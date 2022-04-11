@@ -5,8 +5,6 @@ import type { RootState } from "../store";
 import type { IExpense } from "./types";
 import { ICategory } from "app/categories/types";
 
-export const selectRawExpenses = (state: RootState) => state.expenses.items;
-
 const _selectCategoryNames: Selector<RootState, { [key: string]: string }> = createSelector(
   (state: RootState) => state.categories.items,
   (items: ICategory[]) =>
@@ -35,6 +33,8 @@ function _selectExpenses(
 
   return formattedExpenses;
 }
+
+export const selectRawExpenses = (state: RootState) => state.expenses.items;
 
 type ExpenseWithCategory = IExpense & {
   category: string;

@@ -3,13 +3,19 @@ import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
+import Timeline from "@mui/lab/Timeline";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import TimelineDot from "@mui/lab/TimelineDot";
 import Typography from "@mui/material/Typography";
 
 // temp
 const INSIGHTS = [
-  { value: "Utilities is 69,20€ over budget (+13,8%) (PLACEHOLDER)" },
-  { value: "Utilities overflows 2nd time in 6 months (PLACEHOLDER)" },
-  { value: "Average true budget of Utilitites is 551,20€ (PLACEHOLDER)" },
+  { value: "Utilities is 69,20€ over budget (+13,8%)" },
+  { value: "Utilities overflows 2nd time in 6 months" },
+  { value: "Average true budget of Utilitites is 551,20€" },
 ];
 
 interface TitleProps {
@@ -76,43 +82,45 @@ const StyledInsights = styled(Box)(({ theme }) => ({
   },
 }));
 
+const StyledTimeline = styled(Timeline)(({ theme }) => ({}));
+
 interface LatestInsightsProps {
   insights: any[]; // temp
 }
 
 function LatestInsights({ insights }: LatestInsightsProps) {
   return (
-    <StyledInsights component="ul">
+    <StyledTimeline position="right" sx={{ alignItems: "flex-start", mb: 0, mt: 1, py: 0 }}>
       {insights.map((insight, i) => (
-        <Typography
-          color="text.secondary"
-          component="li"
+        <TimelineItem
           key={i}
-          gutterBottom
-          sx={{
-            alignItems: "center",
-            display: "flex",
-            pl: 1,
-          }}
-          variant="body1"
+          position="right"
+          sx={{ "::before": { display: "none" }, minHeight: 0.75 }}
         >
-          {insight.value}
-        </Typography>
+          <TimelineSeparator>
+            <TimelineDot
+              sx={i !== 0 ? { opacity: 0, my: 0, p: "2px" } : { my: "12px", p: "2px" }}
+            />
+            <TimelineConnector sx={{ my: "-15px" }} />
+          </TimelineSeparator>
+          <TimelineContent
+            sx={{ fontWeight: i === 0 ? "fontWeightMedium" : "fontWeightRegular", py: 0.5 }}
+          >
+            {insight.value}
+          </TimelineContent>
+        </TimelineItem>
       ))}
-      <Typography
-        color="default"
-        component="li"
-        gutterBottom
-        sx={{
-          alignItems: "center",
-          display: "flex",
-        }}
-      >
-        <Link color="primary" component={NavLink} sx={{ fontWeight: "fontWeightMedium" }} to="/">
-          Show more...
-        </Link>
-      </Typography>
-    </StyledInsights>
+      <TimelineItem sx={{ "::before": { display: "none" }, minHeight: 0.5 }}>
+        <TimelineSeparator>
+          <TimelineDot sx={{ my: "12px", p: "2px" }} />
+        </TimelineSeparator>
+        <TimelineContent sx={{ py: 0.5 }}>
+          <Link color="primary" component={NavLink} sx={{ fontWeight: "fontWeightMedium" }} to="/">
+            Show more...
+          </Link>
+        </TimelineContent>
+      </TimelineItem>
+    </StyledTimeline>
   );
 }
 

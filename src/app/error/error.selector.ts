@@ -22,17 +22,6 @@ function _selectRawErrors(errorState: IErrorState, actionTypes: string[]): IErro
   }, {});
 }
 
-/**
- * Returns a new object with the keys being the finished action type
- * (e.g. "someAction/REQUEST_*_FINISHED") and the value being a
- * HttpErrorResponseModel.
- */
-export const selectRawErrors: ParametricSelector<RootState, string[], IErrorState> = createSelector(
-  (state: RootState) => state.error,
-  (_: RootState, actionTypes: string[]) => actionTypes,
-  _selectRawErrors
-);
-
 function _selectErrorText(errorState: IErrorState, actionTypes: string[]): string {
   const errorList: string[] = actionTypes.reduce((errorMessages: string[], actionType: string) => {
     const model: HttpErrorResponse = errorState[actionType];
@@ -50,6 +39,21 @@ function _selectErrorText(errorState: IErrorState, actionTypes: string[]): strin
   return errorList.join(", ");
 }
 
+function _hasErrors(errorState: IErrorState, actionTypes: string[]): boolean {
+  return actionTypes.map((actionType: string) => errorState[actionType]).filter(Boolean).length > 0;
+}
+
+/**
+ * Returns a new object with the keys being the finished action type
+ * (e.g. "someAction/REQUEST_*_FINISHED") and the value being a
+ * HttpErrorResponseModel.
+ */
+export const selectRawErrors: ParametricSelector<RootState, string[], IErrorState> = createSelector(
+  (state: RootState) => state.error,
+  (_: RootState, actionTypes: string[]) => actionTypes,
+  _selectRawErrors
+);
+
 /**
  * Finds any errors matching the array of actionTypes and combines all error messages in to
  * a single string.
@@ -59,10 +63,6 @@ export const selectErrorText: ParametricSelector<RootState, string[], string> = 
   (_: RootState, actionTypes: string[]) => actionTypes,
   _selectErrorText
 );
-
-function _hasErrors(errorState: IErrorState, actionTypes: string[]): boolean {
-  return actionTypes.map((actionType: string) => errorState[actionType]).filter(Boolean).length > 0;
-}
 
 /**
  * Returns true or false if there are errors found matching the array of actionTypes.

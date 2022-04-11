@@ -8,47 +8,47 @@ import type { AppDispatch, RootState } from "../store";
 import type { IExpense, IExpensesParams } from "./types";
 import { NotificationStatusEnum } from "app/notification/types";
 
-export const REQUEST_EXPENSES: string = "expenses/REQUEST_EXPENSES";
-export const REQUEST_EXPENSES_FINISHED: string = "expenses/REQUEST_EXPENSES_FINISHED";
+export const ASYNC_GET_EXPENSES: string = "expenses/ASYNC_GET_EXPENSES";
+export const ASYNC_GET_EXPENSES_FINISHED: string = "expenses/ASYNC_GET_EXPENSES_FINISHED";
 
-export function requestExpenses(params: URLSearchParams): any {
+export function getExpenses(params: URLSearchParams): any {
   return async (dispatch: AppDispatch, getState: RootState) => {
-    dispatch(actionCreator.createAction(REQUEST_EXPENSES));
+    dispatch(actionCreator.createAction(ASYNC_GET_EXPENSES));
 
-    const dataModel = await effect.fetchExpenses(_getUrlParams(params));
+    const dataModel = await effect.getExpenses(_getUrlParams(params));
     const isError = dataModel instanceof HttpErrorResponse;
 
-    dispatch(actionCreator.createAction(REQUEST_EXPENSES_FINISHED, dataModel, isError));
+    dispatch(actionCreator.createAction(ASYNC_GET_EXPENSES_FINISHED, dataModel, isError));
   };
 }
 
-export const REQUEST_EXPENSES_BY_PERIOD: string = "expenses/REQUEST_EXPENSES_BY_PERIOD";
+export const ASYNC_GET_EXPENSES_BY_PERIOD: string = "expenses/ASYNC_GET_EXPENSES_BY_PERIOD";
 
-export function requestExpensesByPeriod(period?: string): any {
+export function getExpensesByPeriod(period?: string): any {
   return async (dispatch: AppDispatch, getState: RootState) => {
-    dispatch(actionCreator.createAction(REQUEST_EXPENSES));
+    dispatch(actionCreator.createAction(ASYNC_GET_EXPENSES));
 
     const date = period ? new Date(period) : new Date();
     const _period = date.toISOString().split("T")[0];
 
-    const dataModel = await effect.fetchExpenses(
+    const dataModel = await effect.getExpenses(
       // to get all rows of period (no backend yet)
       _withParams({ period: _period, page: "1", rows: "9999" })
     );
     const isError = dataModel instanceof HttpErrorResponse;
 
-    dispatch(actionCreator.createAction(REQUEST_EXPENSES_FINISHED, dataModel, isError));
+    dispatch(actionCreator.createAction(ASYNC_GET_EXPENSES_FINISHED, dataModel, isError));
   };
 }
 
-export const POST_EXPENSE: string = "expenses/POST_EXPENSE";
-export const POST_EXPENSE_FINISHED: string = "expenses/POST_EXPENSE_FINISHED";
+export const ASYNC_ADD_EXPENSE: string = "expenses/ASYNC_ADD_EXPENSE";
+export const ASYNC_ADD_EXPENSE_FINISHED: string = "expenses/ASYNC_ADD_EXPENSE_FINISHED";
 
 export function addExpense(expense: Partial<IExpense>, callback?: () => void): any {
   return async (dispatch: AppDispatch, getState: RootState) => {
-    dispatch(actionCreator.createAction(POST_EXPENSE));
+    dispatch(actionCreator.createAction(ASYNC_ADD_EXPENSE));
 
-    const dataModel = await effect.postExpense(expense);
+    const dataModel = await effect.addExpense(expense);
     const isError = dataModel instanceof HttpErrorResponse;
 
     if (isError) {
@@ -58,7 +58,7 @@ export function addExpense(expense: Partial<IExpense>, callback?: () => void): a
       callback && callback();
     }
 
-    dispatch(actionCreator.createAction(POST_EXPENSE_FINISHED, dataModel, isError));
+    dispatch(actionCreator.createAction(ASYNC_ADD_EXPENSE_FINISHED, dataModel, isError));
   };
 }
 

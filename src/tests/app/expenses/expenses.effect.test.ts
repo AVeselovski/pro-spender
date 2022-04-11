@@ -1,7 +1,7 @@
-import { fetchExpenses, postExpense } from "app/expenses/expenses.effect";
+import { getExpenses, addExpense } from "app/expenses/expenses.effect";
 
 describe("expenses.selector", () => {
-  test("fetchExpenses should...", async () => {});
+  test("getExpenses should...", async () => {});
 
-  test("postExpense should...", async () => {});
+  test("addExpense should...", async () => {});
 });

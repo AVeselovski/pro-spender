@@ -26,22 +26,22 @@ function errorsReducer(state = initialState, action: IAction<any>): IErrorState 
     return initialState;
   }
 
-  const isFinishedRequestType = action.type.includes("_FINISHED");
-  const isStartRequestType = isAsyncActionType(action.type) && !isFinishedRequestType;
+  const isFinishedType = action.type.includes("_FINISHED");
+  const isStartType = isAsyncActionType(action.type) && !isFinishedType;
 
   /*
    * If an action is started we want to remove the old error of same type because a
    * new action has been re-dispatched.
    */
-  if (isStartRequestType) {
+  if (isStartType) {
     const { [`${action.type}_FINISHED`]: _value, ...stateWithoutFinishedType } = state;
 
     return stateWithoutFinishedType;
   }
 
-  const isError = isFinishedRequestType && Boolean(action.error);
+  const isError = isFinishedType && Boolean(action.error);
 
-  if (isError === false) {
+  if (!isError) {
     return state;
   }
 

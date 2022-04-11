@@ -2,6 +2,7 @@ import type { Action } from "redux";
 import type IErrorState from "./error/types";
 import type IProcessingState from "./processing/types";
 import type INotificationState from "./notification/types";
+import type IUserState from "./user/types";
 import type ICategoriesState from "./categories/types";
 import type IExpensesState from "./expenses/types";
 
@@ -9,6 +10,7 @@ export default interface IState {
   readonly error: IErrorState;
   readonly processing: IProcessingState;
   readonly notification: INotificationState;
+  readonly user: IUserState;
   readonly categories: ICategoriesState;
   readonly expenses: IExpensesState;
   readonly [key: string]: any;

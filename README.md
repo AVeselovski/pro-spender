@@ -33,7 +33,26 @@ yarn
 yarn start
 ```
 
-### Coding guide
+### Code guide
+
+#### **Actions**
+
+Async operations dispatch 2 actions, start and finish. Async action types consist of 2-3 parts `ASYNC_[action description](_FINISHED)`:
+
+- Flagging as async operation (`ASYNC_`)
+- Action description (`ADD_EXPENSE`, `GET_CATEGORIES`, etc.)
+- When dispatching the second action (`_FINISHED`)
+
+Example: `ASYNC_ADD_EXPENSE`, `ASYNC_ADD_EXPENSE_FINISHED`
+
+Async processing state can then be tracked via selector:
+
+```jsx
+import { ASYNC_ADD_EXPENSE } from "app/expenses/expenses.action";
+
+// ...
+const loading = useAppSelector((state) => selectLoadingStates(state, [ASYNC_ADD_EXPENSE]));
+```
 
 1. Use vanilla function declarations for components and basic functions. Use arrow functions for component methods.
 2. Prepend `_` to function/method names and variables in following cases:

@@ -1,8 +1,7 @@
-/* Update with proper types, once known */
-
 import type { IExpense } from "app/expenses/types";
 
 /* Main default import (state), should be named for importing convenience */
+
 export default interface ICategoriesState {
   readonly items: ICategory[];
   readonly [key: string]: any;

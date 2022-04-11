@@ -11,7 +11,7 @@ function categoriesReducer(state = initialState, action: IAction<any>) {
   if (action.error) return state;
 
   switch (action.type) {
-    case actions.REQUEST_CATEGORIES_FINISHED:
+    case actions.ASYNC_GET_CATEGORIES_FINISHED:
       return {
         ...state,
         items: action.payload,
