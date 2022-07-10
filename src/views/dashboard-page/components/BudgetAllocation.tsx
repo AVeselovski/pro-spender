@@ -4,12 +4,7 @@ import { useAppSelector } from "app/store";
 import { selectCategoriesWithExpenses } from "app/categories/categories.selector";
 import { formatCurrency, formatPercentage } from "utils/numbers";
 
-import { styled, Theme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
+import { Box, LinearProgressBar, Link, Paper, Typography } from "views/components/common";
 
 interface TitleProps {
   children?: React.ReactNode;
@@ -33,20 +28,6 @@ export function Title(props: TitleProps) {
   );
 }
 
-const BorderLinearProgress = styled(LinearProgress, {
-  shouldForwardProp: (prop) => prop !== "overflow",
-})(({ theme, overflow }: { theme?: Theme; overflow: boolean }) => ({
-  borderRadius: 5,
-  height: 10,
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: theme!.palette.grey[theme!.palette.mode === "light" ? 200 : 800],
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    backgroundColor: overflow ? theme!.palette.error.light : theme!.palette.success.light,
-    borderRadius: 5,
-  },
-}));
-
 function BudgetAllocation() {
   const budgetAllocationItems = useAppSelector((state) => selectCategoriesWithExpenses(state));
 
@@ -57,15 +38,7 @@ function BudgetAllocation() {
   };
 
   return (
-    <Paper
-      sx={{
-        px: 2,
-        py: 2,
-        display: "flex",
-        flexDirection: "column",
-      }}
-      variant="outlined"
-    >
+    <Paper>
       <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: 3 }}>
         <Title>Budget allocation</Title>
         <Link
@@ -118,7 +91,7 @@ function BudgetAllocation() {
                 {item.percentage <= 100 && `(${formatPercentage(100 - item.percentage)})`}
               </Typography>
             </Box>
-            <BorderLinearProgress
+            <LinearProgressBar
               overflow={item.percentage > 100}
               variant="determinate"
               value={getBarWidth(item.percentage || 0)}

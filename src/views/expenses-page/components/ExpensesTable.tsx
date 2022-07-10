@@ -8,24 +8,25 @@ import { formatStringDate } from "utils/dates";
 import { formatCurrency } from "utils/numbers";
 
 import useDebounce from "views/components/hooks/useDebounce";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  InputAdornment,
+  MenuItem,
+  Paper,
+  Select,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+  TextField,
+} from "views/components/common";
 import { visuallyHidden } from "@mui/utils";
-
-import FormLabel from "@mui/material/FormLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
 
 import SearchIcon from "@mui/icons-material/SearchRounded";
 
@@ -145,15 +146,7 @@ function ExpensesTable() {
   //   page === pagination.pages - 1 ? Math.max(0, (1 + page) * rows - pagination.rows) : 0;
 
   return (
-    <Paper
-      sx={{
-        px: 0,
-        py: 2,
-        display: "flex",
-        flexDirection: "column",
-      }}
-      variant="outlined"
-    >
+    <Paper sx={{ px: 0 }}>
       <Box
         sx={{
           alignItems: "flex-end",

@@ -5,33 +5,9 @@ import { useAppDispatch } from "app/store";
 import * as categoriesAction from "app/categories/categories.action";
 import * as expensesAction from "app/expenses/expenses.action";
 
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import ExpensesTable from "./components/ExpensesTable";
-import Grid from "@mui/material/Grid";
+import { Box, Grid, Title } from "views/components/common";
 import ExpenseAdder from "views/components/expense-adder";
-
-interface TitleProps {
-  children?: React.ReactNode;
-}
-
-function Title(props: TitleProps) {
-  return (
-    <Typography
-      color="default"
-      component="h1"
-      gutterBottom
-      sx={{
-        alignItems: "center",
-        display: "flex",
-        fontWeight: "fontWeightBold",
-      }}
-      variant="h5"
-    >
-      {props.children}
-    </Typography>
-  );
-}
+import ExpensesTable from "./components/ExpensesTable";
 
 function Expenses() {
   const [searchParams] = useSearchParams();

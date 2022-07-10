@@ -6,8 +6,6 @@ import { selectCategoryNames } from "app/categories/categories.selector";
 import { selectLoadingStates } from "app/processing/processing.selector";
 import { addExpense, ASYNC_ADD_EXPENSE } from "app/expenses/expenses.action";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -16,18 +14,21 @@ import IconButton from "@mui/material/IconButton";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
-
-import FormLabel from "@mui/material/FormLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "views/components/common";
 
 import CloseRounded from "@mui/icons-material/CloseRounded";
 
 const CustomDialog = styled(Dialog)`
   .MuiDialog-paper {
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     margin-bottom: 0;
     margin-top: 4rem;
     max-height: calc(100%);

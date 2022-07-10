@@ -3,17 +3,18 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useAppDispatch } from "app/store";
 import { login } from "app/user/user.action";
 
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Container from "@mui/material/Container";
-
-import FormLabel from "@mui/material/FormLabel";
-import FormControl from "@mui/material/FormControl";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Container,
+  Divider,
+  FormLabel,
+  FormControl,
+  TextField,
+  Typography,
+} from "views/components/common";
 
 interface LocationState {
   from: {
@@ -28,7 +29,7 @@ function Login() {
   const navigate = useNavigate();
 
   const state = location.state as LocationState;
-  const from = state?.from?.pathname || "/69";
+  const from = state?.from?.pathname || "/dashboard";
 
   console.log(location);
 
@@ -84,7 +85,7 @@ function Login() {
                 Sign in
               </Button>
               <Divider sx={{ my: 2 }} />
-              <Button component={NavLink} to="/signup" fullWidth variant="text">
+              <Button component={NavLink} to="/auth/signup" fullWidth variant="text">
                 Don't have an account?
               </Button>
             </form>

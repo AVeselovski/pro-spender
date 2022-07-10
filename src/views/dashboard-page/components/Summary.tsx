@@ -1,15 +1,13 @@
 import { NavLink } from "react-router-dom";
 
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
-import Typography from "@mui/material/Typography";
+import { Box, Link, Typography } from "views/components/common";
 
 // temp
 const INSIGHTS = [

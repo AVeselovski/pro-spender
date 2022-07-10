@@ -2,14 +2,11 @@ import { useAppSelector } from "app/store";
 import { selectTotalBudgetSummary } from "app/categories/categories.selector";
 import { formatCurrency } from "utils/numbers";
 
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Chip from "@mui/material/Chip";
 import CircularProgress, {
   circularProgressClasses,
   CircularProgressProps,
 } from "@mui/material/CircularProgress";
-import Paper from "@mui/material/Paper";
+import { Box, Chip, Paper, Typography } from "views/components/common";
 
 interface TitleProps {
   children?: React.ReactNode;
@@ -104,17 +101,13 @@ function BudgetTotal() {
         minHeight: 180,
         justifyContent: "center",
         mb: 2,
-        px: 2,
-        py: 1,
       }}
-      variant="outlined"
     >
       <Box
         sx={{
           alignItems: "center",
           display: "flex",
           justifyContent: "center",
-          py: 2,
         }}
       >
         <MonthlyProgress value={budgetSummary.percentage} />

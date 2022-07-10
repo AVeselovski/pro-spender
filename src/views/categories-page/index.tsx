@@ -5,34 +5,10 @@ import * as categoriesAction from "app/categories/categories.action";
 import { selectTotalBudgetSummary } from "app/categories/categories.selector";
 import { formatCurrency } from "utils/numbers";
 
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import { Box, Grid, Title, Typography } from "views/components/common";
 import CategoriesGrid from "./components/CategoriesGrid";
-import Box from "@mui/material/Box";
 
 import ExpenseAdder from "views/components/expense-adder";
-
-interface TitleProps {
-  children?: React.ReactNode;
-}
-
-function Title(props: TitleProps) {
-  return (
-    <Typography
-      color="default"
-      component="h1"
-      gutterBottom
-      sx={{
-        alignItems: "center",
-        display: "flex",
-        fontWeight: "fontWeightBold",
-      }}
-      variant="h5"
-    >
-      {props.children}
-    </Typography>
-  );
-}
 
 function Categories() {
   const budgetSummary = useAppSelector((state) => selectTotalBudgetSummary(state));

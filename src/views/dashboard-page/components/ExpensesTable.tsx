@@ -6,18 +6,19 @@ import { selectExpenses } from "app/expenses/expenses.selector";
 import { formatStringDate } from "utils/dates";
 import { formatCurrency } from "utils/numbers";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-
+import {
+  Box,
+  Button,
+  Link,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "views/components/common";
 import ExpenseModal from "views/components/expense-adder/ExpenseModal";
 
 interface TitleProps {
@@ -48,16 +49,7 @@ function ExpensesTable() {
 
   return (
     <>
-      <TableContainer
-        component={Paper}
-        sx={{
-          px: 0,
-          py: 2,
-          display: "flex",
-          flexDirection: "column",
-        }}
-        variant="outlined"
-      >
+      <TableContainer component={Paper} sx={{ px: 0 }}>
         <Box
           sx={{
             alignItems: "center",

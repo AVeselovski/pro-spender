@@ -3,17 +3,18 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "app/store";
 import { signup } from "app/user/user.action";
 
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Container from "@mui/material/Container";
-
-import FormLabel from "@mui/material/FormLabel";
-import FormControl from "@mui/material/FormControl";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Container,
+  Divider,
+  FormLabel,
+  FormControl,
+  TextField,
+  Typography,
+} from "views/components/common";
 
 function Signup() {
   const dispatch = useAppDispatch();
@@ -84,7 +85,7 @@ function Signup() {
                 Sign up
               </Button>
               <Divider sx={{ my: 2 }} />
-              <Button component={NavLink} to="/login" fullWidth variant="text">
+              <Button component={NavLink} to="/auth/login" fullWidth variant="text">
                 Already have an account?
               </Button>
             </form>

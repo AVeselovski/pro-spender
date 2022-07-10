@@ -17,24 +17,18 @@ function AppRoutes() {
     <BrowserRouter>
       <Suspense fallback={<CircularProgress />}>
         <Routes>
-          <Route path="/" element={<App />}>
-            <Route index element={<Navigate replace to="/login" />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-          </Route>
-
           <Route
-            path="/:vaultId"
+            path="/"
             element={
               <ProtectedRoute>
                 <App isProtected />
               </ProtectedRoute>
             }
           >
-            <Route index element={<Navigate replace to="/1/dashboard" />} />
-            <Route path="/:vaultId/dashboard" element={<Dashboard />} />
-            <Route path="/:vaultId/categories" element={<Categories />} />
-            <Route path="/:vaultId/expenses" element={<Expenses />} />
+            <Route index element={<Navigate replace to="/dashboard" />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/expenses" element={<Expenses />} />
             <Route
               path="*"
               element={
@@ -43,6 +37,12 @@ function AppRoutes() {
                 </main>
               }
             />
+          </Route>
+
+          <Route path="/auth" element={<App />}>
+            <Route index element={<Navigate replace to="/auth/login" />} />
+            <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/signup" element={<Signup />} />
           </Route>
         </Routes>
       </Suspense>

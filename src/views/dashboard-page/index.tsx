@@ -4,13 +4,13 @@ import { useAppDispatch } from "app/store";
 import * as categoriesAction from "app/categories/categories.action";
 import * as expensesAction from "app/expenses/expenses.action";
 
-import Grid from "@mui/material/Grid";
+import { Grid } from "views/components/common";
 
+import ExpenseAdder from "views/components/expense-adder";
 import Summary from "./components/Summary";
 import ExpensesTable from "./components/ExpensesTable";
 import BudgetTotal from "./components/BudgetTotal";
 import BudgetAllocation from "./components/BudgetAllocation";
-import ExpenseAdder from "views/components/expense-adder";
 
 function Dashboard() {
   const dispatch = useAppDispatch();

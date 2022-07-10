@@ -128,7 +128,7 @@ function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
         <Toolbar
           sx={
             {
-              // pr: "666px", // keep right padding when drawer closed
+              // pr: "666px", // keep right padding when drawer closed (?)
             }
           }
         >
@@ -183,19 +183,19 @@ function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItemButton component={NavLink} to="/1">
+          <ListItemButton component={NavLink} to="/dashboard">
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
           </ListItemButton>
-          <ListItemButton component={NavLink} to="/1/categories">
+          <ListItemButton component={NavLink} to="/categories">
             <ListItemIcon>
               <CategoryIcon />
             </ListItemIcon>
             <ListItemText primary="Categories" />
           </ListItemButton>
-          <ListItemButton component={NavLink} to="/1/expenses">
+          <ListItemButton component={NavLink} to="/expenses">
             <ListItemIcon>
               <ExpenseIcon />
             </ListItemIcon>

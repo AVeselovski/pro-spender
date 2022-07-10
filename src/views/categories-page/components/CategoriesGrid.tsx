@@ -2,11 +2,7 @@ import { useAppSelector } from "app/store";
 import { selectRawCategories } from "app/categories/categories.selector";
 import { formatCurrency } from "utils/numbers";
 
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { Card, CardActionArea, CardContent, Grid, Typography } from "views/components/common";
 
 const COLORS: { [key: number]: string } = {
   1: "#F2F2F4",
@@ -28,7 +24,6 @@ function CategoriesGrid() {
             sx={{
               backgroundColor: COLORS[c.color],
             }}
-            variant="outlined"
           >
             <CardActionArea>
               <CardContent sx={{ height: 160 }}>
