@@ -11,9 +11,7 @@ const StyledPaper = styled(MuiPaper)<PaperProps>(({ theme }) => ({
   paddingRight: "1rem",
 }));
 
-type Props = PaperProps & {
-  children: React.ReactNode;
-};
+type Props = PaperProps;
 
 const Paper: FC<Props> = ({ children, ...props }) => {
   return (

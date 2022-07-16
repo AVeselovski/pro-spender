@@ -7,7 +7,7 @@ import { selectExpenses, selectExpensesPagination } from "app/expenses/expenses.
 import { formatStringDate } from "utils/dates";
 import { formatCurrency } from "utils/numbers";
 
-import useDebounce from "views/components/hooks/useDebounce";
+import useDebounce from "views/hooks/useDebounce";
 import {
   Box,
   FormControl,

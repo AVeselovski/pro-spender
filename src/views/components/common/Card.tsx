@@ -7,9 +7,7 @@ const StyledCard = styled(MuiCard)<CardProps>(({ theme }) => ({
   borderRadius: "0.5rem",
 }));
 
-type Props = CardProps & {
-  children: React.ReactNode;
-};
+type Props = CardProps;
 
 const Card: FC<Props> = ({ children, ...props }) => {
   return (

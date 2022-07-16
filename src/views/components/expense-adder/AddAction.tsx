@@ -1,13 +1,15 @@
-import Fab from "@mui/material/Fab";
+import { FC } from "react";
 
-import AddIcon from "@mui/icons-material/AddRounded";
+import { Fab } from "../common";
+import { AddIcon } from "../icons";
 
-interface Props {
-  children?: React.ReactNode | string;
-  handleAction?: () => void;
-}
+type Props = {
+  onAction?: () => void;
+};
 
-function AddAction({ children = "", handleAction = () => {} }: Props) {
+const AddAction: FC<Props> = ({ children = "", onAction = () => {} }) => {
+  const handleAction = onAction;
+
   return (
     <Fab
       aria-label="add expense"
@@ -29,6 +31,6 @@ function AddAction({ children = "", handleAction = () => {} }: Props) {
       {children}
     </Fab>
   );
-}
+};
 
 export default AddAction;

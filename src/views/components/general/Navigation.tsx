@@ -1,29 +1,31 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import MuiDrawer, { DrawerProps as MuiDrawerProps } from "@mui/material/Drawer";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import MuiDrawer from "@mui/material/Drawer";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import DashboardIcon from "@mui/icons-material/DashboardRounded";
-import CategoryIcon from "@mui/icons-material/CategoryRounded";
-import ExpenseIcon from "@mui/icons-material/ListAltRounded";
-import MenuIcon from "@mui/icons-material/MenuRounded";
-import PersonIcon from "@mui/icons-material/PersonRounded";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-
-const drawerWidth: number = 240;
+import {
+  Divider,
+  IconButton,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from "../common";
+import {
+  CategoryIcon,
+  ChevronLeftIcon,
+  DashboardIcon,
+  ExpenseIcon,
+  MenuIcon,
+  PersonIcon,
+} from "../icons";
 
 const openedMixin = (theme: Theme): CSSObject => ({
   overflowX: "hidden",
@@ -31,7 +33,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
-  width: drawerWidth,
+  width: theme.drawerWidth,
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -40,27 +42,29 @@ const closedMixin = (theme: Theme): CSSObject => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: "0",
   [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(9)} + 1px)`,
+    width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
 
-interface AppBarProps extends MuiAppBarProps {
-  isOpen?: boolean;
-}
+type AppBarProps = MuiAppBarProps & {
+  open?: boolean;
+};
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "isOpen",
-})<AppBarProps>(({ theme, isOpen }) => ({
-  zIndex: theme.zIndex.drawer + 1,
+  shouldForwardProp: (prop) => prop !== "open",
+})<AppBarProps>(({ theme, open }) => ({
+  borderLeft: "none",
+  borderRight: "none",
+  borderTop: "none",
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  ...(isOpen && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
+  zIndex: theme.zIndex.drawer + 1,
+  ...(open && {
+    width: `calc(100% - ${theme.drawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -68,13 +72,17 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
+type DrawerProps = MuiDrawerProps & {
+  open?: boolean;
+};
+
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  width: drawerWidth,
+})<DrawerProps>(({ theme, open }) => ({
+  boxSizing: "border-box",
   flexShrink: 0,
   whiteSpace: "nowrap",
-  boxSizing: "border-box",
+  width: theme.drawerWidth,
   ...(open && {
     ...openedMixin(theme),
     "& .MuiDrawer-paper": openedMixin(theme),
@@ -89,30 +97,28 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   display: "flex",
   justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
+  padding: theme.spacing(0, 1.5),
+  /* Necessary for content to be below app bar */
   ...theme.mixins.toolbar,
 }));
 
-function getLocationName(path: string) {
-  const _path = path.replace("/", "");
+function getLocationName(pathname: string) {
+  const path = pathname.replace("/", "");
+  if (!path) return "ProSpender";
 
-  if (!_path) return "Spendly";
-
-  return _path[0].toUpperCase() + _path.substring(1);
+  return path[0].toUpperCase() + path.substring(1);
 }
 
-interface NavigationProps {
+type Props = {
   isOpen: boolean;
   toggleDrawer: () => void;
-}
+};
 
-function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
+const Navigation: FC<Props> = ({ isOpen, toggleDrawer }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const isUserMenuOpen = Boolean(anchorEl);
 
   const location = useLocation();
-
-  const isUserMenuOpen = Boolean(anchorEl);
 
   const handleUserMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -124,22 +130,16 @@ function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
 
   return (
     <>
-      <AppBar color="default" elevation={0} isOpen={isOpen} position="fixed" variant="outlined">
-        <Toolbar
-          sx={
-            {
-              // pr: "666px", // keep right padding when drawer closed (?)
-            }
-          }
-        >
+      <AppBar color="inherit" elevation={0} open={isOpen} position="fixed" variant="outlined">
+        <Toolbar>
           <IconButton
             aria-label="open drawer menu"
             color="inherit"
             edge="start"
             onClick={toggleDrawer}
-            size="large"
+            size="medium"
             sx={{
-              mr: 4,
+              mr: 4.5,
               ...(isOpen && { display: "none" }),
             }}
           >
@@ -154,7 +154,7 @@ function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
             aria-haspopup="true"
             aria-label="user"
             color="inherit"
-            size="large"
+            size="medium"
             id="user-menu-button"
             onClick={handleUserMenuClick}
             sx={{ ml: 2 }}
@@ -183,19 +183,19 @@ function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItemButton component={NavLink} to="/dashboard">
+          <ListItemButton component={NavLink} sx={{ pl: 2.5 }} to="/dashboard">
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
           </ListItemButton>
-          <ListItemButton component={NavLink} to="/categories">
+          <ListItemButton component={NavLink} sx={{ pl: 2.5 }} to="/categories">
             <ListItemIcon>
               <CategoryIcon />
             </ListItemIcon>
             <ListItemText primary="Categories" />
           </ListItemButton>
-          <ListItemButton component={NavLink} to="/expenses">
+          <ListItemButton component={NavLink} sx={{ pl: 2.5 }} to="/expenses">
             <ListItemIcon>
               <ExpenseIcon />
             </ListItemIcon>
@@ -205,6 +205,6 @@ function Navigation({ isOpen, toggleDrawer }: NavigationProps) {
       </Drawer>
     </>
   );
-}
+};
 
 export default Navigation;

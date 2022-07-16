@@ -1,41 +1,25 @@
-import { forwardRef, useEffect, useState } from "react";
-import { styled } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "app/store";
 import { selectCategoryNames } from "app/categories/categories.selector";
 import { selectLoadingStates } from "app/processing/processing.selector";
 import { addExpense, ASYNC_ADD_EXPENSE } from "app/expenses/expenses.action";
 
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import IconButton from "@mui/material/IconButton";
-import LoadingButton from "@mui/lab/LoadingButton";
-import Slide from "@mui/material/Slide";
-import { TransitionProps } from "@mui/material/transitions";
 import {
   Box,
   Button,
+  DialogActions,
+  DialogContent,
   FormControl,
   FormLabel,
+  LoadingButton,
   MenuItem,
+  Modal,
   Select,
   TextField,
-} from "views/components/common";
+} from "../common";
 
-import CloseRounded from "@mui/icons-material/CloseRounded";
-
-const CustomDialog = styled(Dialog)`
-  .MuiDialog-paper {
-    border-radius: 0.75rem;
-    margin-bottom: 0;
-    margin-top: 4rem;
-    max-height: calc(100%);
-  }
-`;
-
-function ExpenseModal({ isOpen = false, handleClose = () => {} }) {
+const ExpenseModal = ({ isOpen = false, onClose = () => {} }) => {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -45,7 +29,8 @@ function ExpenseModal({ isOpen = false, handleClose = () => {} }) {
   const loading = useAppSelector((state) => selectLoadingStates(state, [ASYNC_ADD_EXPENSE]));
   const categories = useAppSelector((state) => selectCategoryNames(state));
 
-  const lastUsed = "1"; // NOTE: will be pulling from local storage (should persist locally)
+  // NOTE: will be pulling from local storage (should persist locally)
+  const lastUsed = "1";
   const submitDisabled = !amount || !description;
 
   const clearForm = () => {
@@ -53,9 +38,9 @@ function ExpenseModal({ isOpen = false, handleClose = () => {} }) {
     setDescription("");
   };
 
-  const _handleClose = () => {
+  const handleClose = () => {
     clearForm();
-    handleClose();
+    onClose();
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -64,36 +49,14 @@ function ExpenseModal({ isOpen = false, handleClose = () => {} }) {
     if (amount && description && category) {
       const expenseData = { amount: Number(amount), description, category };
 
-      dispatch(addExpense(expenseData, _handleClose));
+      dispatch(addExpense(expenseData, handleClose));
     }
   };
 
   useEffect(() => setCategory(lastUsed), [lastUsed]);
 
   return (
-    <CustomDialog
-      aria-labelledby="expense-modal-title"
-      aria-describedby="expense-modal-description"
-      closeAfterTransition
-      keepMounted
-      onClose={_handleClose}
-      open={isOpen}
-      sx={{ marginTop: "4rem" }}
-      TransitionComponent={Transition}
-    >
-      <Box
-        sx={{
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "space-between",
-          pr: 2,
-        }}
-      >
-        <DialogTitle>Add Expense</DialogTitle>
-        <IconButton onClick={_handleClose}>
-          <CloseRounded />
-        </IconButton>
-      </Box>
+    <Modal isOpen={isOpen} onClose={handleClose} title="Add expense">
       <form onSubmit={handleSubmit}>
         <DialogContent sx={{ maxWidth: 480 }}>
           <FormControl sx={{ mb: 2, width: "100%" }}>
@@ -136,7 +99,13 @@ function ExpenseModal({ isOpen = false, handleClose = () => {} }) {
           </FormControl>
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 3 }}>
-          <Button disableElevation onClick={_handleClose} size="large" variant="outlined">
+          <Button
+            disableElevation
+            onClick={handleClose}
+            size="large"
+            sx={{ minWidth: "120px" }}
+            variant="outlined"
+          >
             Discard
           </Button>
           <LoadingButton
@@ -144,25 +113,17 @@ function ExpenseModal({ isOpen = false, handleClose = () => {} }) {
             disableElevation
             loading={loading}
             size="large"
+            sx={{ minWidth: "120px" }}
             type="submit"
             variant="contained"
           >
-            Add now
+            Add
           </LoadingButton>
         </DialogActions>
       </form>
       <Box sx={{ height: "100vh" }} />
-    </CustomDialog>
+    </Modal>
   );
-}
+};
 
 export default ExpenseModal;
-
-const Transition = forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<any, any>;
-  },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});

@@ -11,6 +11,7 @@ import type IState from "./types";
 
 const middleware = [thunk];
 
+// TODO: Figure out appropriate initialState typing
 const configureStore = (initialState: Partial<IState> = {}): Store<IState> => {
   return createStore(
     rootReducer(),
@@ -25,7 +26,6 @@ export default store;
 
 /** Infer the `RootState` and `AppDispatch` types from the store itself */
 export type RootState = ReturnType<typeof store.getState>;
-/** Infer the `RootState` and `AppDispatch` types from the store itself */
 export type AppDispatch = typeof store.dispatch;
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();

@@ -115,7 +115,7 @@ function ExpensesTable() {
         </Link>
       </TableContainer>
 
-      <ExpenseModal isOpen={isOpen} handleClose={() => setIsOpen(false)} />
+      <ExpenseModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   );
 }

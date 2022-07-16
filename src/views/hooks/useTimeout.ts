@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef } from "react";
 /**
  * Sets timeout on initial load. Can reset and clear manually.
  */
-function useTimeout(callback = () => {}, delay = 1000) {
+const useTimeout = (callback = () => {}, delay = 1000) => {
   const callbackRef = useRef(() => {});
   const timeoutRef = useRef<undefined | NodeJS.Timeout>();
 
@@ -30,6 +30,6 @@ function useTimeout(callback = () => {}, delay = 1000) {
   }, [delay, set, clear]);
 
   return { reset, clear };
-}
+};
 
 export default useTimeout;

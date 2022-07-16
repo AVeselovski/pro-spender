@@ -1,10 +1,8 @@
+import { FC } from "react";
+
 import Typography from "@mui/material/Typography";
 
-interface TitleProps {
-  children?: React.ReactNode;
-}
-
-function Title(props: TitleProps) {
+const PageTitle: FC = ({ children }) => {
   return (
     <Typography
       color="default"
@@ -17,9 +15,9 @@ function Title(props: TitleProps) {
       }}
       variant="h5"
     >
-      {props.children}
+      {children}
     </Typography>
   );
-}
+};
 
-export default Title;
+export default PageTitle;

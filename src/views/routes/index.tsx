@@ -1,18 +1,17 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import CircularProgress from "@mui/material/CircularProgress";
-
+import { CircularProgress } from "../components/common";
 import ProtectedRoute from "./ProtectedRoute";
-import App from "views/App";
+import App from "../App";
 
-const Login = lazy(() => import("views/login-page"));
-const Signup = lazy(() => import("views/signup-page"));
-const Dashboard = lazy(() => import("views/dashboard-page"));
-const Categories = lazy(() => import("views/categories-page"));
-const Expenses = lazy(() => import("views/expenses-page"));
+const Login = lazy(() => import("../pages/login-page"));
+const Signup = lazy(() => import("../pages/signup-page"));
+const Dashboard = lazy(() => import("../pages/dashboard-page"));
+const Categories = lazy(() => import("../pages/categories-page"));
+const Expenses = lazy(() => import("../pages/expenses-page"));
 
-function AppRoutes() {
+const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Suspense fallback={<CircularProgress />}>
@@ -48,6 +47,6 @@ function AppRoutes() {
       </Suspense>
     </BrowserRouter>
   );
-}
+};
 
 export default AppRoutes;

@@ -19,12 +19,12 @@ export async function getExpenses(params: IExpensesParams) {
 
 export async function addExpense(expense: Partial<IExpense>) {
   const endpoint = `tmp/expenses.json`;
-  // const response = await fetcher.post(endpoint, expense);
-  /* mocking successful/failed requests */
-  const rand = Math.random();
-  const response =
-    Math.round(rand) === 1 ? await fetcher.post(endpoint, expense) : await fetcher.get(endpoint);
-  /***/
+  const response = await fetcher.post(endpoint, expense);
+  // mocking successful/failed requests
+  // const rand = Math.random();
+  // const response =
+  //   Math.round(rand) === 1 ? await fetcher.post(endpoint, expense) : await fetcher.get(endpoint);
+  // ***
 
   if (response instanceof HttpErrorResponse) {
     return response;

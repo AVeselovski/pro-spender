@@ -1,19 +1,20 @@
-# Spendly App
+# ProSpender App (proper name pending...)
 
 App for tracking monthly spending. Organize your spending by categories, assign budgets to categories and see if the budgets hold. Get true monthly averages and make monthly adjustments to your budgets (or spending habits) to hit consistency.
 
 Future features:
 
 1. Graphs and statistics to help visualize spending patterns.
-2. "Insights". Generated based on available data (e.g. "Category X overflows 2nd time this year, consider adjusting the budget or your spending").
+2. "Insights". Generated based on available data (e.g. "Category X overflows 2nd time this year, consider adjusting the budget or your spending"). Backend generated.
 3. Recurring expenses (subscriptions).
-4. Budget buidler. Helps defining a budget with the help of recurring expenses and "soft" estimations.
+4. Budget builder. Helps defining a budget with the help of recurring expenses and "soft" estimations.
+5. Minimalistic companion mobile app to quickly add expenses.
 
 ## Tech
 
 ### Frontend
 
-Basic fully client-side React-Redux app with MUI. Bootstrapped with CRA. Recharts will be used for drawing graphs later down the line. NextJS might be adopted later if the need for serverside rendering occurs.
+Basic fully client-side React-Redux app with MUI. Bootstrapped with CRA. Recharts will be used for drawing graphs later down the line. NextJS might be adopted later if the need / use-case arises.
 
 Testing will be handled with `jest`and `cypress`.
 
@@ -26,6 +27,7 @@ Backend will most likely be built with NestJS with SQL database structure. _More
 ### To run:
 
 ```bash
+# install dependencies
 yarn
 ```
 
@@ -54,8 +56,48 @@ import { ASYNC_ADD_EXPENSE } from "app/expenses/expenses.action";
 const loading = useAppSelector((state) => selectLoadingStates(state, [ASYNC_ADD_EXPENSE]));
 ```
 
-1. Use vanilla function declarations for components and basic functions. Use arrow functions for component methods.
-2. Prepend `_` to function/method names and variables in following cases:
-   - Helper function that is not exported (used locally by exportable function)
-   - Makes sense to be named similarly, but clashes with argument / prop name (`abc` and `_abc`, rather than `abc` and `anotherAbc`)
-     - Example: In-component `_handleSubmit` to handle some operations before calling `handleSubmit` prop
+#### **Commenting**
+
+Loose guide to help where `prettier` an `eslint` can't, not a rule.
+
+Generally, when making comments that are temporary in nature (commented out code or "TODO", etc.) try to use inline comments:
+
+```jsx
+// TODO: Figure out "x" and "y"
+
+// const x = a(b)
+
+// function hi() {
+//   return "Hello"
+// }
+```
+
+When making comments that are "there to stay" (e.g. describing functionality, documenting, etc.) use multiline syntax:
+
+```jsx
+/* Pass location to be able to get back after login */
+if (!user.id) {
+  return <Navigate to="/auth" state={{ from: location }} replace />;
+}
+
+/* Other named exports */
+
+export { funcA, constB };
+```
+
+This helps somewhat by being visually distinctive.
+
+Use JSDoc syntax when describing exportable functions for additional convenience:
+
+```jsx
+/**
+ * Uses useTimeout hook to delay an action. Use case: "Search on type" - inputs.
+ */
+const useDebounce = (callback = log, delay = 1000, dependencies: any[] = []) => {
+  // ...
+};
+
+export default useDebounce;
+```
+
+This allows for "at a glance" descriptions when importing these functions.

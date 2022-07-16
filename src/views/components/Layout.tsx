@@ -1,16 +1,13 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 
-import Box from "@mui/system/Box";
-import Container from "@mui/material/Container";
-
+import { Box, Container } from "views/components/common";
 import Navigation, { DrawerHeader } from "./general/Navigation";
 
-type LayoutProps = {
-  children: JSX.Element;
+type Props = {
   isProtected: boolean;
 };
 
-function Layout({ children, isProtected = true }: LayoutProps) {
+const Layout: FC<Props> = ({ children, isProtected = true }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDrawer = () => {
@@ -22,8 +19,7 @@ function Layout({ children, isProtected = true }: LayoutProps) {
       <Box
         component="main"
         sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light" ? theme.palette.grey[100] : theme.palette.grey[900],
+          backgroundColor: (theme) => theme.palette.grey[100],
           flexGrow: 1,
           height: "100vh",
           overflow: "auto",
@@ -39,8 +35,7 @@ function Layout({ children, isProtected = true }: LayoutProps) {
       <Box
         component="main"
         sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light" ? theme.palette.grey[100] : theme.palette.grey[900],
+          backgroundColor: (theme) => theme.palette.grey[100],
           flexGrow: 1,
           height: "100vh",
           overflow: "auto",
@@ -53,6 +48,6 @@ function Layout({ children, isProtected = true }: LayoutProps) {
       </Box>
     </Box>
   );
-}
+};
 
 export default Layout;

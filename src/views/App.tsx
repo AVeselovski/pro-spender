@@ -1,18 +1,15 @@
 import { Outlet } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import CssBaseline from "@mui/material/CssBaseline";
+import { theme, ThemeProvider, CssBaseline } from "utils/theme";
 
 import Layout from "./components/Layout";
 import Notifications from "./components/general/Notifications";
 
-const mdTheme = createTheme();
-
-function App({ isProtected = false }) {
-  console.log(mdTheme);
+const App = ({ isProtected = false }) => {
+  console.log("THEME", theme);
 
   return (
-    <ThemeProvider theme={mdTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
       <Notifications />
 
@@ -21,6 +18,6 @@ function App({ isProtected = false }) {
       </Layout>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

@@ -5,7 +5,7 @@ import * as categoriesAction from "app/categories/categories.action";
 import { selectTotalBudgetSummary } from "app/categories/categories.selector";
 import { formatCurrency } from "utils/numbers";
 
-import { Box, Grid, Title, Typography } from "views/components/common";
+import { Box, Grid, PageTitle, Typography } from "views/components/common";
 import CategoriesGrid from "./components/CategoriesGrid";
 
 import ExpenseAdder from "views/components/expense-adder";
@@ -22,7 +22,7 @@ function Categories() {
   return (
     <>
       <Box sx={{ alignItems: "center", display: "flex", justifyContent: "space-between", mb: 3 }}>
-        <Title>Categories</Title>
+        <PageTitle>Categories</PageTitle>
         <Typography component="span" sx={{ fontWeight: "fontWeightBold" }} variant="h5">
           {formatCurrency(budgetSummary.totalBudget)}
         </Typography>
