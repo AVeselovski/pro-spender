@@ -1,19 +1,13 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 
 import { Box, Container } from "views/components/common";
-import Navigation, { DrawerHeader } from "./general/Navigation";
+import Navigation, { NavSpacer } from "./general/navigation";
 
 type Props = {
   isProtected: boolean;
 };
 
 const Layout: FC<Props> = ({ children, isProtected = true }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleDrawer = () => {
-    setIsOpen((val) => !val);
-  };
-
   return !isProtected ? (
     <Box sx={{ display: "flex" }}>
       <Box
@@ -30,7 +24,7 @@ const Layout: FC<Props> = ({ children, isProtected = true }) => {
     </Box>
   ) : (
     <Box sx={{ display: "flex" }}>
-      <Navigation isOpen={isOpen} toggleDrawer={toggleDrawer} />
+      <Navigation />
 
       <Box
         component="main"
@@ -41,7 +35,7 @@ const Layout: FC<Props> = ({ children, isProtected = true }) => {
           overflow: "auto",
         }}
       >
-        <DrawerHeader />
+        <NavSpacer />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           {children}
         </Container>

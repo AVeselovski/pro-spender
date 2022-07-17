@@ -4,11 +4,11 @@ import MuiPaper, { PaperProps } from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 
 const StyledPaper = styled(MuiPaper)<PaperProps>(({ theme }) => ({
-  borderRadius: "0.5rem",
-  paddingBottom: "1.5rem",
-  paddingTop: "1.5rem",
-  paddingLeft: "1rem",
-  paddingRight: "1rem",
+  borderRadius: theme.spacing(1),
+  paddingBottom: theme.spacing(3),
+  paddingTop: theme.spacing(3),
+  paddingLeft: theme.spacing(2),
+  paddingRight: theme.spacing(2),
 }));
 
 type Props = PaperProps;

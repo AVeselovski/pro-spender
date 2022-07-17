@@ -11,12 +11,15 @@ import { CloseRounded } from "../icons";
 
 const StyledDialog = styled(MuiDialog)<DialogProps>(({ theme }) => ({
   [`.${dialogClasses.paper}`]: {
-    borderRadius: "0.75rem",
-    marginBottom: "0",
-    marginTop: "4rem",
-    maxHeight: "calc(100%)",
-    marginLeft: "0",
-    marginRight: "0",
+    borderRadius: theme.spacing(1.5),
+    marginBottom: `-${theme.spacing(3)}`,
+    marginTop: theme.spacing(0),
+    maxHeight: "100%",
+    marginLeft: 0,
+    marginRight: 0,
+    [theme.breakpoints.up("sm")]: {
+      marginTop: theme.spacing(3),
+    },
   },
 }));
 
@@ -35,7 +38,6 @@ const Modal: FC<Props> = ({ children, isOpen = false, onClose = () => {}, title 
       aria-labelledby={`${ariaLabel}-modal-title`}
       aria-describedby={`${ariaLabel}-modal-description`}
       closeAfterTransition
-      keepMounted
       onClose={handleClose}
       open={isOpen}
       sx={{ marginTop: "4rem" }}

@@ -5,7 +5,7 @@ declare module "@mui/material/styles" {
   interface Theme {
     drawerWidth: number;
   }
-  // allow configuration using `createTheme`
+  /* Allow configuration using `createTheme` */
   interface ThemeOptions {
     drawerWidth: number;
   }
