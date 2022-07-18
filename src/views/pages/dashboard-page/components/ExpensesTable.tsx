@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, memo, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { useAppSelector } from "app/store";
@@ -21,50 +21,18 @@ import {
 } from "views/components/common";
 import ExpenseModal from "views/components/expense-adder/ExpenseModal";
 
-interface TitleProps {
-  children?: React.ReactNode;
-}
-
-export function Title(props: TitleProps) {
-  return (
-    <Typography
-      color="text"
-      component="h2"
-      gutterBottom
-      sx={{
-        alignItems: "center",
-        display: "flex",
-        mb: 0,
-      }}
-      variant="h6"
-    >
-      {props.children}
-    </Typography>
-  );
-}
-
-function ExpensesTable() {
+const ExpensesTable = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   const expenses = useAppSelector((state) => selectExpenses(state, 5));
+
+  console.log("ExpensesTable");
 
   return (
     <>
       <TableContainer component={Paper} sx={{ px: 0 }}>
-        <Box
-          sx={{
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "space-between",
-            mb: 1,
-            px: 2,
-          }}
-        >
-          <Title>Latest expenses</Title>
-          <Button onClick={() => setIsOpen(true)} size="small">
-            + Add
-          </Button>
-        </Box>
-        <Table aria-label="A table of expenses" size="medium">
+        <Header onAction={setIsOpen} />
+        <Table aria-label="a table of expenses" size="medium">
           <TableHead>
             <TableRow>
               <TableCell>Date</TableCell>
@@ -105,7 +73,7 @@ function ExpensesTable() {
           </TableBody>
         </Table>
         <Link
-          align="right"
+          align="center"
           color="primary"
           component={NavLink}
           sx={{ display: "block", fontWeight: "fontWeightMedium", mr: 2, mt: 2 }}
@@ -118,6 +86,43 @@ function ExpensesTable() {
       <ExpenseModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   );
-}
+};
 
 export default ExpensesTable;
+
+type HeaderProps = {
+  onAction: (val: boolean) => void;
+};
+
+const Header: FC<HeaderProps> = memo(({ onAction }) => {
+  const handleAction = onAction;
+
+  return (
+    <Box
+      sx={{
+        alignItems: "center",
+        display: "flex",
+        justifyContent: "space-between",
+        mb: 1,
+        px: 2,
+      }}
+    >
+      <Typography
+        color="text"
+        component="h2"
+        gutterBottom
+        sx={{
+          alignItems: "center",
+          display: "flex",
+          mb: 0,
+        }}
+        variant="h6"
+      >
+        Latest expenses
+      </Typography>
+      <Button onClick={() => handleAction(true)} size="small">
+        + Add
+      </Button>
+    </Box>
+  );
+});

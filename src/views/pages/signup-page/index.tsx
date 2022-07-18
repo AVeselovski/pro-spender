@@ -16,7 +16,7 @@ import {
   Typography,
 } from "views/components/common";
 
-function Signup() {
+const Signup = () => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -35,18 +35,18 @@ function Signup() {
       sx={{
         alignItems: "center",
         display: "flex",
-        height: "100vh",
+        height: "100%",
         justifyContent: ["center", "center", "space-between"],
       }}
     >
-      <Card variant="outlined" sx={{ borderRadius: "1rem", minWidth: ["100%", 320] }}>
+      <Card variant="outlined" sx={{ minWidth: ["100%", 320] }}>
         <CardContent sx={{ px: [2, 3], py: 3 }}>
           <Box sx={{ mb: 3 }}>
             <Typography align="center" variant="h6" component="h1">
-              Spendly
+              ProSpender
             </Typography>
             <Typography align="center" gutterBottom variant="h4" component="h2">
-              Welcome back!
+              Get started today!
             </Typography>
           </Box>
           <Container disableGutters sx={{ maxWidth: ["100%", 380] }}>
@@ -56,7 +56,7 @@ function Signup() {
                 <TextField
                   autoFocus
                   id="email"
-                  placeholder="jane.spender@spendly.com"
+                  placeholder="jane.spender@prospender.com"
                   size="medium"
                   type="email"
                 />
@@ -85,7 +85,13 @@ function Signup() {
                 Sign up
               </Button>
               <Divider sx={{ my: 2 }} />
-              <Button component={NavLink} to="/auth/login" fullWidth variant="text">
+              <Button
+                component={NavLink}
+                fullWidth
+                sx={{ textTransform: "none" }}
+                to="/auth/login"
+                variant="text"
+              >
                 Already have an account?
               </Button>
             </form>
@@ -94,6 +100,6 @@ function Signup() {
       </Card>
     </Box>
   );
-}
+};
 
 export default Signup;

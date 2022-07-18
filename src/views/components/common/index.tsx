@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import Chip from "@mui/material/Chip";
-import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -25,6 +24,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Slide from "@mui/material/Slide";
 import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
+import Timeline from "@mui/lab/Timeline";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import TimelineDot from "@mui/lab/TimelineDot";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 /* Form */
@@ -49,7 +54,6 @@ export {
   CardActionArea,
   CardContent,
   Chip,
-  CircularProgress,
   Container,
   Dialog,
   DialogActions,
@@ -70,6 +74,12 @@ export {
   Slide,
   Snackbar,
   Stack,
+  Timeline,
+  TimelineConnector,
+  TimelineContent,
+  TimelineDot,
+  TimelineItem,
+  TimelineSeparator,
   Toolbar,
   Typography,
   /* Form */
@@ -93,8 +103,11 @@ export {
 
 export { default as Alert } from "./Alert";
 export { default as Card } from "./Card";
+export { default as CircularProgress } from "./CircularProgress";
 export { default as LinearProgressBar } from "./LinearProgressBar";
+export { default as Main } from "./Main";
+export { default as MainContent } from "./MainContent";
 export { default as Modal } from "./Modal";
-export { default as Paper } from "./Paper";
 export { default as PageTitle } from "./PageTitle";
+export { default as Paper } from "./Paper";
 export { default as Transition } from "./Transition";

@@ -1,94 +1,70 @@
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
 
-import { styled } from "@mui/material/styles";
-import Timeline from "@mui/lab/Timeline";
-import TimelineItem from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineDot from "@mui/lab/TimelineDot";
-import { Box, Link, Typography } from "views/components/common";
+import {
+  Box,
+  Link,
+  Timeline,
+  TimelineConnector,
+  TimelineContent,
+  TimelineDot,
+  TimelineItem,
+  TimelineSeparator,
+  Typography,
+} from "views/components/common";
 
-// temp
+// TEMP
 const INSIGHTS = [
   { value: "Utilities is 69,20€ over budget (+13,8%)" },
   { value: "Utilities overflows 2nd time in 6 months" },
   { value: "Average true budget of Utilitites is 551,20€" },
 ];
 
-interface TitleProps {
-  children?: React.ReactNode;
-}
+const Summary = () => {
+  const insights = INSIGHTS; // TEMP > select latest insights
 
-function Title(props: TitleProps) {
   return (
-    <Typography
-      color="default"
-      component="h1"
-      gutterBottom
-      sx={{
-        alignItems: "center",
-        display: "flex",
-        fontWeight: "fontWeightBold",
-        mb: 1.5,
-      }}
-      variant="h5"
-    >
-      {props.children}
-    </Typography>
+    <Box sx={{ minHeight: 170, mb: 1.5 }}>
+      <Title>March 2022</Title>
+
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box>
+          <LatestInsights insights={insights} />
+        </Box>
+      </Box>
+    </Box>
   );
-}
+};
 
-// const StyledInsights = styled(Box)(({ theme }) => ({
-//   marginBottom: 0,
-//   paddingLeft: "20px",
-//   position: "relative",
-//   "&::before": {
-//     backgroundColor: "#ccc",
-//     content: '""',
-//     position: "absolute",
-//     height: "70%",
-//     left: "3px",
-//     top: "15%",
-//     width: "3px",
-//   },
-//   "> *:first-of-type": {
-//     color: theme.palette.text.primary,
-//     fontWeight: theme.typography.fontWeightMedium,
-//     paddingLeft: 0,
-//     "::before": {
-//       backgroundColor: "#ccc",
-//       borderRadius: "50%",
-//       content: '""',
-//       position: "absolute",
-//       height: "9px",
-//       left: "0px",
-//       width: "9px",
-//     },
-//   },
-//   "> *:last-child": {
-//     fontWeight: theme.typography.fontWeightMedium,
-//     "::before": {
-//       backgroundColor: "#ccc",
-//       borderRadius: "50%",
-//       content: '""',
-//       position: "absolute",
-//       height: "9px",
-//       left: "0px",
-//       width: "9px",
-//     },
-//   },
-// }));
+export default Summary;
 
-const StyledTimeline = styled(Timeline)(({ theme }) => ({}));
+const Title: FC = ({ children }) => (
+  <Typography
+    color="default"
+    component="h2"
+    gutterBottom
+    sx={{
+      alignItems: "center",
+      display: "flex",
+      fontWeight: "fontWeightBold",
+      mb: 1.5,
+      ml: 2,
+    }}
+    variant="h6"
+  >
+    {children}
+  </Typography>
+);
 
-interface LatestInsightsProps {
-  insights: any[]; // temp
-}
+type LatestInsightsProps = {
+  insights: any[]; // temp > IInsight[]
+};
 
-function LatestInsights({ insights }: LatestInsightsProps) {
+const LatestInsights: FC<LatestInsightsProps> = ({ insights }) => {
+  // TODO: Needs proper design of insights themselves as a concept and the structure of whatever is behind "show more"
+
   return (
-    <StyledTimeline position="right" sx={{ alignItems: "flex-start", mb: 0, mt: 1, py: 0 }}>
+    <Timeline position="right" sx={{ alignItems: "flex-start", mb: 0, mt: 1, py: 0 }}>
       {insights.map((insight, i) => (
         <TimelineItem
           key={i}
@@ -118,22 +94,6 @@ function LatestInsights({ insights }: LatestInsightsProps) {
           </Link>
         </TimelineContent>
       </TimelineItem>
-    </StyledTimeline>
+    </Timeline>
   );
-}
-
-function Summary() {
-  return (
-    <Box sx={{ minHeight: 170, mb: 1.5 }}>
-      <Title>March 2022</Title>
-
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Box>
-          <LatestInsights insights={INSIGHTS} />
-        </Box>
-      </Box>
-    </Box>
-  );
-}
-
-export default Summary;
+};

@@ -22,7 +22,7 @@ interface LocationState {
   };
 }
 
-function Login() {
+const Login = () => {
   const dispatch = useAppDispatch();
 
   const location = useLocation();
@@ -43,15 +43,15 @@ function Login() {
       sx={{
         alignItems: "center",
         display: "flex",
-        height: "100vh",
+        height: "100%",
         justifyContent: ["center", "center", "space-between"],
       }}
     >
-      <Card variant="outlined" sx={{ borderRadius: "1rem", minWidth: ["100%", 320] }}>
+      <Card variant="outlined" sx={{ minWidth: ["100%", 320] }}>
         <CardContent sx={{ px: [2, 3], py: 3 }}>
           <Box sx={{ mb: 3 }}>
             <Typography align="center" variant="h6" component="h1">
-              Spendly
+              ProSpender
             </Typography>
             <Typography align="center" gutterBottom variant="h4" component="h2">
               Welcome back!
@@ -64,7 +64,7 @@ function Login() {
                 <TextField
                   autoFocus
                   id="email"
-                  placeholder="jane.spender@spendly.com"
+                  placeholder="jane.spender@prospender.com"
                   size="medium"
                   type="email"
                 />
@@ -85,7 +85,13 @@ function Login() {
                 Sign in
               </Button>
               <Divider sx={{ my: 2 }} />
-              <Button component={NavLink} to="/auth/signup" fullWidth variant="text">
+              <Button
+                component={NavLink}
+                fullWidth
+                sx={{ textTransform: "none" }}
+                to="/auth/signup"
+                variant="text"
+              >
                 Don't have an account?
               </Button>
             </form>
@@ -94,6 +100,6 @@ function Login() {
       </Card>
     </Box>
   );
-}
+};
 
 export default Login;

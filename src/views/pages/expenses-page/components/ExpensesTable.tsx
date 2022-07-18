@@ -214,7 +214,7 @@ function ExpensesTable() {
         </form>
       </Box>
       <TableContainer>
-        <Table aria-label="A table of expenses" size="medium" sx={{ minWidth: 650 }}>
+        <Table aria-label="a table of expenses" size="medium" sx={{ minWidth: 650 }}>
           <TableHead>
             <TableRow>
               {headCells.map((cell) => (

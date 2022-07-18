@@ -74,7 +74,7 @@ export const UserButton: FC<UserButtonProps> = ({ children, ...props }) => {
     <MuiButtonBase
       {...props}
       aria-haspopup="true"
-      aria-label="user"
+      aria-label="user button"
       color="inherit"
       id="user-menu-button"
       sx={{ ml: 2, borderRadius: 50 }}

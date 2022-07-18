@@ -2,88 +2,9 @@ import { useAppSelector } from "app/store";
 import { selectTotalBudgetSummary } from "app/categories/categories.selector";
 import { formatCurrency } from "utils/numbers";
 
-import CircularProgress, {
-  circularProgressClasses,
-  CircularProgressProps,
-} from "@mui/material/CircularProgress";
-import { Box, Chip, Paper, Typography } from "views/components/common";
+import { Box, Chip, CircularProgress, Paper, Typography } from "views/components/common";
 
-interface TitleProps {
-  children?: React.ReactNode;
-}
-
-export function Title(props: TitleProps) {
-  return (
-    <Typography
-      color="primary"
-      component="h2"
-      gutterBottom
-      sx={{
-        alignItems: "center",
-        display: "flex",
-      }}
-      variant="h6"
-    >
-      {props.children}
-    </Typography>
-  );
-}
-
-function MonthlyProgress({ value = 0, ...props }: CircularProgressProps) {
-  return (
-    <Box sx={{ position: "relative", mr: 2, mt: 1 }}>
-      <CircularProgress
-        {...props}
-        size={90}
-        sx={{
-          color: (theme) => theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
-        }}
-        thickness={4}
-        value={100}
-        variant="determinate"
-      />
-      <CircularProgress
-        {...props}
-        size={90}
-        sx={{
-          animationDuration: "550ms",
-          color: value <= 100 ? "success.light" : "error.light",
-          left: 0,
-          position: "absolute",
-          [`& .${circularProgressClasses.circle}`]: {
-            strokeLinecap: "round",
-          },
-        }}
-        thickness={4}
-        value={value}
-        variant="determinate"
-      />
-      <Box
-        sx={{
-          alignItems: "center",
-          bottom: 0,
-          display: "flex",
-          justifyContent: "center",
-          left: 0,
-          position: "absolute",
-          right: 0,
-          top: 0,
-        }}
-      >
-        <Typography
-          color={value <= 100 ? "success.main" : "error.main"}
-          component="span"
-          sx={{ mb: "0.25rem" }}
-          variant="h5"
-        >
-          {`${value.toFixed(0)}%`}
-        </Typography>
-      </Box>
-    </Box>
-  );
-}
-
-function BudgetTotal() {
+const BudgetTotal = () => {
   const budgetSummary = useAppSelector((state) => selectTotalBudgetSummary(state));
 
   const expenses = budgetSummary.totalExpenses;
@@ -98,8 +19,8 @@ function BudgetTotal() {
       sx={{
         alignItems: "center",
         display: "flex",
-        minHeight: 180,
         justifyContent: "center",
+        minHeight: 180,
         mb: 2,
       }}
     >
@@ -110,7 +31,7 @@ function BudgetTotal() {
           justifyContent: "center",
         }}
       >
-        <MonthlyProgress value={budgetSummary.percentage} />
+        <CircularProgress value={budgetSummary.percentage} />
         <Box
           sx={{
             alignItems: "center",
@@ -131,6 +52,6 @@ function BudgetTotal() {
       </Box>
     </Paper>
   );
-}
+};
 
 export default BudgetTotal;
