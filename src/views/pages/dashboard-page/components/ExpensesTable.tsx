@@ -26,8 +26,6 @@ const ExpensesTable = () => {
 
   const expenses = useAppSelector((state) => selectExpenses(state, 5));
 
-  console.log("ExpensesTable");
-
   return (
     <>
       <TableContainer component={Paper} sx={{ px: 0 }}>

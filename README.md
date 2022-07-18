@@ -56,6 +56,8 @@ import { ASYNC_ADD_EXPENSE } from "app/expenses/expenses.action";
 const loading = useAppSelector((state) => selectLoadingStates(state, [ASYNC_ADD_EXPENSE]));
 ```
 
+### OCD guide
+
 #### **Commenting**
 
 Loose guide to help where `prettier` an `eslint` can't, not a rule.
@@ -101,3 +103,34 @@ export default useDebounce;
 ```
 
 This allows for "at a glance" descriptions when importing these functions.
+
+#### **Organize hooks within a component**
+
+Components might have a lot of `useThis` and `useThat` lines, which are annoying to look at. For some of OCD compliant organization, a loose order:
+
+1. `useState`
+2. `useAppSelector` & `useAppDispatch`
+3. Other hooks
+4. Methods
+5. `useEffect`
+
+```jsx
+const Component = () => {
+  const [a, setA] = useState()
+  const [b, setB] = useState()
+
+  const x = useAppSelector(state => state.x)
+  const y = useAppSelector(state => state.y)
+  const dispatch = useAppDispatch()
+
+  const location = useLocation();
+  const queryRef = useRef<HTMLInputElement>();
+  // Etc.
+
+  // Methods
+
+  // useEffect
+
+  return (...)
+}
+```

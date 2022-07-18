@@ -10,6 +10,7 @@ type Props = {
 
 const ProtectedRoute: FC<Props> = ({ children }) => {
   const user = useAppSelector(selectUser);
+
   const location = useLocation();
 
   console.log(user, location);

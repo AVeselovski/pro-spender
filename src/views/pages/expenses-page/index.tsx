@@ -10,8 +10,9 @@ import ExpenseAdder from "views/components/expense-adder";
 import ExpensesTable from "./components/ExpensesTable";
 
 function Expenses() {
-  const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
+
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     dispatch(categoriesAction.getCategories());

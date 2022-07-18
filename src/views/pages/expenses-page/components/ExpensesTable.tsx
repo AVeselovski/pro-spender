@@ -78,12 +78,11 @@ function ExpensesTable() {
   const [query, setQuery] = useState("");
   const [queryInput, setQueryInput] = useState("");
 
-  const queryRef = useRef<HTMLInputElement>();
-
   const categories = useAppSelector((state) => selectCategoryNames(state));
   const expenses = useAppSelector((state) => selectExpenses(state, 0));
   const pagination = useAppSelector((state) => selectExpensesPagination(state));
 
+  const queryRef = useRef<HTMLInputElement>();
   let [, setSearchParams] = useSearchParams();
 
   const handlePage = (event: unknown, newPage: number) => {

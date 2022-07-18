@@ -24,10 +24,9 @@ const ExpenseModal = ({ isOpen = false, onClose = () => {} }) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
 
-  const dispatch = useAppDispatch();
-
   const loading = useAppSelector((state) => selectLoadingStates(state, [ASYNC_ADD_EXPENSE]));
   const categories = useAppSelector((state) => selectCategoryNames(state));
+  const dispatch = useAppDispatch();
 
   // NOTE: will be pulling from local storage (should persist locally)
   const lastUsed = "1";

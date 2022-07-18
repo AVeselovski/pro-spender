@@ -24,6 +24,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Slide from "@mui/material/Slide";
 import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import Timeline from "@mui/lab/Timeline";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
@@ -74,6 +76,8 @@ export {
   Slide,
   Snackbar,
   Stack,
+  Tab,
+  Tabs,
   Timeline,
   TimelineConnector,
   TimelineContent,
@@ -110,4 +114,5 @@ export { default as MainContent } from "./MainContent";
 export { default as Modal } from "./Modal";
 export { default as PageTitle } from "./PageTitle";
 export { default as Paper } from "./Paper";
+export { default as TabNav } from "./TabNav";
 export { default as Transition } from "./Transition";

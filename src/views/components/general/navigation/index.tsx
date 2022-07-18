@@ -2,7 +2,11 @@ import { FC, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
-import { Divider, IconButton, Menu, MenuItem, Toolbar, Typography } from "../../common";
+import { useAppSelector } from "app/store";
+import { selectTotalBudgetSummary } from "app/categories/categories.selector";
+import { formatCurrency } from "utils/numbers";
+
+import { Chip, Divider, IconButton, Menu, MenuItem, Toolbar, Typography } from "../../common";
 import { ChevronLeftIcon, MenuIcon } from "../../icons";
 import AppBar, { DesktopMenuButton, MobileMenuButton, UserButton } from "./AppBar";
 import Drawer, { DrawerHeader, MobileDrawer } from "./Drawer";
@@ -22,10 +26,17 @@ const getLocationName = (pathname: string) => {
 
 const Navigation: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const budgetSummary = useAppSelector((state) => selectTotalBudgetSummary(state));
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isUserMenuOpen = Boolean(anchorEl);
 
   const location = useLocation();
+
+  const expenses = budgetSummary.totalExpenses;
+  const budget = budgetSummary.totalBudget;
+  const budgetRatio = `${formatCurrency(expenses)} / ${formatCurrency(budget)}`;
 
   const toggleDrawer = () => {
     setIsOpen((val) => !val);
@@ -66,6 +77,13 @@ const Navigation: FC = () => {
             {getLocationName(location.pathname)}
           </Typography>
 
+          <Chip
+            color="default"
+            label={budgetRatio}
+            size="small"
+            sx={{ fontSize: "body2.fontSize", mr: 2 }}
+            variant="outlined"
+          />
           <UserButton
             aria-controls={isUserMenuOpen ? "basic-menu" : undefined}
             aria-expanded={isUserMenuOpen ? "true" : undefined}
