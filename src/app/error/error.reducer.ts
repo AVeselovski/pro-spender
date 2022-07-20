@@ -1,9 +1,8 @@
 import * as actions from "./error.action";
 import HttpErrorResponse from "models/HttpErrorResponse";
 import { isAsyncActionType } from "utils/actionUtility";
-
-import type { IAction } from "../types";
-import type IErrorState from "./types";
+import { IAction } from "../types";
+import IErrorState from "./types";
 
 const initialState: IErrorState = {};
 

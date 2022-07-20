@@ -1,9 +1,8 @@
 import { v4 as uuid } from "uuid";
 
 import * as actionCreator from "utils/actionUtility";
-
-import type { IAction } from "../types";
-import type { INotification, NotificationStatusEnum } from "./types";
+import { IAction } from "../types";
+import { INotification, NotificationStatusEnum } from "./types";
 
 export const ADD_NOTIFICATION: string = "notification/ADD_NOTIFICATION";
 

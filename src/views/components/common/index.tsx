@@ -1,6 +1,7 @@
 /* General */
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import ButtonBase from "@mui/material/ButtonBase";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import Chip from "@mui/material/Chip";
@@ -53,6 +54,7 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 export {
   Box,
   Button,
+  ButtonBase,
   CardActionArea,
   CardContent,
   Chip,
@@ -115,4 +117,6 @@ export { default as Modal } from "./Modal";
 export { default as PageTitle } from "./PageTitle";
 export { default as Paper } from "./Paper";
 export { default as TabNav } from "./TabNav";
+export { IconTabNav } from "./TabNav";
+export { RouterTabNav } from "./TabNav";
 export { default as Transition } from "./Transition";

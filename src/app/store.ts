@@ -1,24 +1,21 @@
-import { applyMiddleware, createStore } from "redux";
-import { useDispatch, useSelector } from "react-redux";
+import { applyMiddleware, createStore, Store } from "redux";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import rootReducer from "./rootReducer";
-
-import type { Store } from "redux";
-import type { TypedUseSelectorHook } from "react-redux";
-import type IState from "./types";
+import IState from "./types";
 
 const middleware = [thunk];
 
 // TODO: Figure out appropriate initialState typing
-const configureStore = (initialState: Partial<IState> = {}): Store<IState> => {
+function configureStore(initialState: Partial<IState> = {}): Store<IState> {
   return createStore(
     rootReducer(),
     initialState as any,
     composeWithDevTools(applyMiddleware(...middleware))
   );
-};
+}
 
 const store = configureStore();
 

@@ -1,10 +1,16 @@
-import type { IExpense } from "app/expenses/types";
+import { IExpense } from "app/expenses/types";
 
 /* Main default import (state), should be named for importing convenience */
 
 export default interface ICategoriesState {
   readonly items: ICategory[];
+  readonly tabs: Tabs;
   readonly [key: string]: any;
+}
+
+interface Tabs {
+  layout: number;
+  nav: number;
 }
 
 /* Other named exports */

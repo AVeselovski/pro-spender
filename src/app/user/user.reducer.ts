@@ -1,8 +1,6 @@
 import * as actions from "./user.action";
-
-import type { IAction } from "../types";
-import type IUserState from "./types";
-import type { IUser } from "./types";
+import { IAction } from "../types";
+import IUserState, { IUser } from "./types";
 
 const initialState: IUserState = {};
 

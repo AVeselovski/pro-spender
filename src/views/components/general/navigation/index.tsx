@@ -12,11 +12,6 @@ import AppBar, { DesktopMenuButton, MobileMenuButton, UserButton } from "./AppBa
 import Drawer, { DrawerHeader, MobileDrawer } from "./Drawer";
 import NavList from "./NavList";
 
-export const NavSpacer = styled("div")(({ theme }) => ({
-  /* Necessary for content to be below app bar */
-  ...theme.mixins.toolbar,
-}));
-
 const getLocationName = (pathname: string) => {
   const path = pathname.replace("/", "");
   if (!path) return "ProSpender";
@@ -81,7 +76,7 @@ const Navigation: FC = () => {
             color="default"
             label={budgetRatio}
             size="small"
-            sx={{ fontSize: "body2.fontSize", mr: 2 }}
+            sx={{ display: ["none", "block"], fontSize: "body2.fontSize", mr: 2 }}
             variant="outlined"
           />
           <UserButton
@@ -132,3 +127,8 @@ const Navigation: FC = () => {
 };
 
 export default Navigation;
+
+export const NavSpacer = styled("div")(({ theme }) => ({
+  /* Necessary for content to be below app bar */
+  ...theme.mixins.toolbar,
+}));

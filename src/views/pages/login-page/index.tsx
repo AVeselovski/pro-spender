@@ -31,8 +31,6 @@ const Login = () => {
   const state = location.state as LocationState;
   const from = state?.from?.pathname || "/dashboard";
 
-  console.log(location);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(login({ email: "test", password: "test" }, () => navigate(from, { replace: true })));

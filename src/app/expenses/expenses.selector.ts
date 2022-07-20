@@ -1,38 +1,7 @@
-import { createSelector } from "reselect";
+import { createSelector, ParametricSelector, Selector } from "reselect";
 
-import type { Selector, ParametricSelector } from "reselect";
-import type { RootState } from "../store";
-import type { IExpense } from "./types";
-import { ICategory } from "app/categories/types";
-
-const _selectCategoryNames: Selector<RootState, { [key: string]: string }> = createSelector(
-  (state: RootState) => state.categories.items,
-  (items: ICategory[]) =>
-    items.reduce((obj: { [key: string]: string }, item) => {
-      obj[item.id] = item.name;
-
-      return obj;
-    }, {})
-);
-
-function _selectExpenses(
-  items: IExpense[],
-  limit: number,
-  categoryNames: { [key: string]: string }
-) {
-  const slicedItems = limit ? items.slice(0, limit) : items;
-  const formattedExpenses = slicedItems.map((expense) => {
-    return {
-      ...expense,
-      date: expense.date,
-      expense: expense.description,
-      category: categoryNames[expense.categoryId],
-      amount: expense.amount,
-    };
-  });
-
-  return formattedExpenses;
-}
+import { RootState } from "../store";
+import { IExpense } from "./types";
 
 export const selectRawExpenses = (state: RootState) => state.expenses.items;
 
@@ -60,3 +29,30 @@ export const selectExpensesTotal: Selector<RootState, number> = createSelector(
   (state: RootState) => state.expenses.items,
   (items: IExpense[]) => items.reduce((total: number, item) => (total += item.amount), 0)
 );
+
+function _selectCategoryNames(state: RootState) {
+  return state.categories.items.reduce((obj: { [key: string]: string }, item) => {
+    obj[item.id] = item.name;
+
+    return obj;
+  }, {});
+}
+
+function _selectExpenses(
+  items: IExpense[],
+  limit: number,
+  categoryNames: { [key: string]: string }
+) {
+  const slicedItems = limit ? items.slice(0, limit) : items;
+  const formattedExpenses = slicedItems.map((expense) => {
+    return {
+      ...expense,
+      date: expense.date,
+      expense: expense.description,
+      category: categoryNames[expense.categoryId],
+      amount: expense.amount,
+    };
+  });
+
+  return formattedExpenses;
+}

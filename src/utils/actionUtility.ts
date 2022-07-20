@@ -5,6 +5,4 @@ export const createAction = (
   meta: any = null
 ) => ({ type, payload, error, meta });
 
-export const isAsyncActionType = (type: string) => {
-  return type.includes("ASYNC_");
-};
+export const isAsyncActionType = (type: string) => type.includes("ASYNC_");

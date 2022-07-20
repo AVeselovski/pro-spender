@@ -1,8 +1,7 @@
 import fetcher from "utils/fetcher";
 import { mockResponse } from "utils/mockBackend/expenses";
 import HttpErrorResponse from "models/HttpErrorResponse";
-
-import type { IExpense, IExpensesParams } from "./types";
+import { IExpense, IExpensesParams } from "./types";
 
 export async function getExpenses(params: IExpensesParams) {
   const endpoint = `tmp/expenses.json`;

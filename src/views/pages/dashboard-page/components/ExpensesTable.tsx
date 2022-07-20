@@ -21,6 +21,43 @@ import {
 } from "views/components/common";
 import ExpenseModal from "views/components/expense-adder/ExpenseModal";
 
+type HeaderProps = {
+  onAction: (val: boolean) => void;
+};
+
+const Header: FC<HeaderProps> = memo(({ onAction }) => {
+  const handleAction = onAction;
+
+  return (
+    <Box
+      sx={{
+        alignItems: "center",
+        display: "flex",
+        justifyContent: "space-between",
+        mb: 1,
+        px: 2,
+      }}
+    >
+      <Typography
+        color="text"
+        component="h2"
+        gutterBottom
+        sx={{
+          alignItems: "center",
+          display: "flex",
+          mb: 0,
+        }}
+        variant="h6"
+      >
+        Latest expenses
+      </Typography>
+      <Button onClick={() => handleAction(true)} size="small">
+        + Add
+      </Button>
+    </Box>
+  );
+});
+
 const ExpensesTable = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -87,40 +124,3 @@ const ExpensesTable = () => {
 };
 
 export default ExpensesTable;
-
-type HeaderProps = {
-  onAction: (val: boolean) => void;
-};
-
-const Header: FC<HeaderProps> = memo(({ onAction }) => {
-  const handleAction = onAction;
-
-  return (
-    <Box
-      sx={{
-        alignItems: "center",
-        display: "flex",
-        justifyContent: "space-between",
-        mb: 1,
-        px: 2,
-      }}
-    >
-      <Typography
-        color="text"
-        component="h2"
-        gutterBottom
-        sx={{
-          alignItems: "center",
-          display: "flex",
-          mb: 0,
-        }}
-        variant="h6"
-      >
-        Latest expenses
-      </Typography>
-      <Button onClick={() => handleAction(true)} size="small">
-        + Add
-      </Button>
-    </Box>
-  );
-});

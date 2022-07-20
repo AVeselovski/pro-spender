@@ -104,6 +104,23 @@ export default useDebounce;
 
 This allows for "at a glance" descriptions when importing these functions.
 
+#### **Import / Export**
+
+Default export should be first, followed by other named exports. When it comes to components, point is to be able to read the "main show" first.
+
+```jsx
+// imports...
+
+// Unexported Main helper functions & child components...
+
+const Main = () => {};
+export default Main;
+
+// Unexported Secondary helper functions & child components...
+
+export const Secondary = () => {};
+```
+
 #### **Organize hooks within a component**
 
 Components might have a lot of `useThis` and `useThat` lines, which are annoying to look at. For some of OCD compliant organization, a loose order:
@@ -134,3 +151,7 @@ const Component = () => {
   return (...)
 }
 ```
+
+#### **Vanilla VS arrow functions**
+
+Just to try and keep it semi consistent, by default stick with arrow functions for components and "vanilla" functions for `app` and other non JSX files. It's of course very much acceptable to use arrow functions where it makes sense (e.g. "inline" returns), in non JSX files too.

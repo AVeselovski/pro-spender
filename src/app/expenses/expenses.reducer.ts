@@ -1,7 +1,6 @@
 import * as actions from "./expenses.action";
-
-import type { IAction } from "../types";
-import type IExpensesState from "./types";
+import { IAction } from "../types";
+import IExpensesState from "./types";
 
 const initialState: IExpensesState = {
   items: [],

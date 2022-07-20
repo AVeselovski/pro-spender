@@ -2,9 +2,7 @@ import { useEffect } from "react";
 
 import useTimeout from "./useTimeout";
 
-const log = () => {
-  console.log("%c Bounce!", "font-weight: bold");
-};
+const log = () => console.log("%c Bounce!", "font-weight: bold");
 
 /**
  * Uses useTimeout hook to delay an action. Use case: "Search on type" - inputs.

@@ -8,23 +8,6 @@ import { formatCurrency, formatPercentage } from "utils/numbers";
 
 import { Box, LinearProgressBar, Link, Paper, Typography } from "views/components/common";
 
-const BudgetAllocation = () => {
-  const budgetAllocationItems = useAppSelector((state) => selectCategoriesWithExpenses(state));
-
-  return (
-    <Paper>
-      <Header />
-      <Box>
-        {budgetAllocationItems.map((item) => (
-          <CategoryBudgetProgress item={item} key={item.id} />
-        ))}
-      </Box>
-    </Paper>
-  );
-};
-
-export default BudgetAllocation;
-
 const Header = memo(() => (
   <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: 3 }}>
     <Typography color="text" component="h2" gutterBottom sx={{ mb: 0 }} variant="h6">
@@ -41,11 +24,6 @@ const Header = memo(() => (
     </Link>
   </Box>
 ));
-
-const getBarWidth = (val: number) => {
-  if (val > 100) return 100;
-  return val;
-};
 
 const CategoryBudgetProgress = ({ item }: { item: ICategoryWithExpenses }) => (
   <Box sx={{ mb: 2.5 }}>
@@ -87,10 +65,23 @@ const CategoryBudgetProgress = ({ item }: { item: ICategoryWithExpenses }) => (
       </Typography>
     </Box>
 
-    <LinearProgressBar
-      overflow={item.percentage > 100}
-      value={getBarWidth(item.percentage || 0)}
-      variant="determinate"
-    />
+    <LinearProgressBar value={item.percentage} variant="determinate" />
   </Box>
 );
+
+const BudgetAllocation = () => {
+  const budgetAllocationItems = useAppSelector((state) => selectCategoriesWithExpenses(state));
+
+  return (
+    <Paper>
+      <Header />
+      <Box>
+        {budgetAllocationItems.map((item) => (
+          <CategoryBudgetProgress item={item} key={item.id} />
+        ))}
+      </Box>
+    </Paper>
+  );
+};
+
+export default BudgetAllocation;

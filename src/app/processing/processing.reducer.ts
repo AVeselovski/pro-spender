@@ -1,7 +1,6 @@
 import { isAsyncActionType } from "utils/actionUtility";
-
-import type { IAction } from "../types";
-import type IProcessingState from "./types";
+import { IAction } from "../types";
+import IProcessingState from "./types";
 
 const initialState: IProcessingState = {};
 

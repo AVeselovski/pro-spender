@@ -1,29 +1,18 @@
 import { useAppSelector } from "app/store";
-import { selectRawCategories } from "app/categories/categories.selector";
+import { selectCategoriesWithExpenses } from "app/categories/categories.selector";
 import { formatCurrency } from "utils/numbers";
 
-import { Card, CardActionArea, CardContent, Grid, Typography } from "views/components/common";
-import { ICategory } from "app/categories/types";
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CircularProgress,
+  Grid,
+  Typography,
+} from "views/components/common";
+import { ICategoryWithExpenses } from "app/categories/types";
 import { FC } from "react";
-
-const CategoriesGrid = () => {
-  const categories = useAppSelector(selectRawCategories);
-
-  return (
-    <>
-      {categories.map((c) => (
-        <Grid item key={c.id} xs={12} sm={12} md={6} lg={4}>
-          <Category category={c} />
-        </Grid>
-      ))}
-      <Grid item xs={12} sm={6} md={6} lg={4}>
-        <CategoryAddButton onAction={() => {}} />
-      </Grid>
-    </>
-  );
-};
-
-export default CategoriesGrid;
 
 // TEMP > from backend
 const COLORS: { [key: number]: string } = {
@@ -36,7 +25,7 @@ const COLORS: { [key: number]: string } = {
 };
 
 type CategoryProps = {
-  category: ICategory;
+  category: ICategoryWithExpenses;
 };
 
 const Category: FC<CategoryProps> = ({ category }) => (
@@ -46,13 +35,21 @@ const Category: FC<CategoryProps> = ({ category }) => (
     }}
   >
     <CardActionArea>
-      <CardContent sx={{ height: 160 }}>
-        <Typography gutterBottom variant="h6" component="div">
-          {category.name}
-        </Typography>
-        <Typography color="text.secondary" variant="h4" sx={{ mt: 3, textAlign: "center" }}>
-          {formatCurrency(category.budget)}
-        </Typography>
+      <CardContent sx={{ height: 158 }}>
+        <Box sx={{ alignItems: "center", display: "flex", justifyContent: "space-between" }}>
+          <Typography gutterBottom variant="h6" component="div">
+            {category.name}
+          </Typography>
+          <Typography gutterBottom variant="h6" component="div">
+            {formatCurrency(category.budget)}
+          </Typography>
+        </Box>
+        <Box sx={{ justifyContent: "flex-start", display: "flex", mx: 1, mt: 1 }}>
+          <CircularProgress size="small" value={category.percentage} />
+          <Typography color="text.secondary" variant="body1" sx={{ mt: 1, textAlign: "left" }}>
+            {category.description}
+          </Typography>
+        </Box>
       </CardContent>
     </CardActionArea>
   </Card>
@@ -84,3 +81,22 @@ const CategoryAddButton: FC<CategoryAddButtonProps> = ({ onAction }) => {
     </Card>
   );
 };
+
+const CategoriesGrid = () => {
+  const categories = useAppSelector((state) => selectCategoriesWithExpenses(state));
+
+  return (
+    <>
+      {categories.map((c) => (
+        <Grid item key={c.id} xs={12} sm={12} md={6} lg={4}>
+          <Category category={c} />
+        </Grid>
+      ))}
+      <Grid item xs={12} sm={12} md={6} lg={4}>
+        <CategoryAddButton onAction={() => {}} />
+      </Grid>
+    </>
+  );
+};
+
+export default CategoriesGrid;

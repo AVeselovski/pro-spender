@@ -240,7 +240,7 @@ function ExpensesTable() {
           </TableHead>
           <TableBody>
             {expenses.map((row, i) => (
-              <TableRow key={i}>
+              <TableRow hover key={i}>
                 <TableCell component="th" scope="row" width={170}>
                   {formatStringDate(row.date)}
                 </TableCell>

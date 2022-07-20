@@ -1,8 +1,6 @@
 import * as actions from "./notification.action";
-
-import type { IAction } from "../types";
-import type INotificationState from "./types";
-import type { INotification } from "./types";
+import { IAction } from "../types";
+import INotificationState, { INotification } from "./types";
 
 const initialState: INotificationState = {
   items: [],

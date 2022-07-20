@@ -3,10 +3,9 @@ import * as effect from "./expenses.effect";
 import { addNotification } from "app/notification/notification.action";
 import HttpErrorResponse from "models/HttpErrorResponse";
 import ExpensesUrlParams from "models/ExpensesUrlParams";
-
-import type { AppDispatch, RootState } from "../store";
-import type { IExpense, IExpensesParams } from "./types";
 import { NotificationStatusEnum } from "app/notification/types";
+import { AppDispatch, RootState } from "../store";
+import { IExpense, IExpensesParams } from "./types";
 
 export const ASYNC_GET_EXPENSES: string = "expenses/ASYNC_GET_EXPENSES";
 export const ASYNC_GET_EXPENSES_FINISHED: string = "expenses/ASYNC_GET_EXPENSES_FINISHED";
@@ -63,12 +62,12 @@ export function addExpense(expense: Partial<IExpense>, callback?: () => void): a
 }
 
 function _getUrlParams(urlParams: URLSearchParams) {
-  const _urlParams: Partial<IExpensesParams> = Object.fromEntries([...urlParams]);
+  const expensesParams: Partial<IExpensesParams> = Object.fromEntries([...urlParams]);
   const params: { [key: string]: any } = new ExpensesUrlParams();
 
   Object.keys(params).forEach((key) => {
-    if (_urlParams[key as keyof IExpensesParams]) {
-      params[key] = _urlParams[key as keyof IExpensesParams];
+    if (expensesParams[key as keyof IExpensesParams]) {
+      params[key] = expensesParams[key as keyof IExpensesParams];
     }
   });
 
@@ -76,13 +75,13 @@ function _getUrlParams(urlParams: URLSearchParams) {
 }
 
 function _withParams(params?: { [key: string]: string }) {
-  const _params: { [key: string]: any } = new ExpensesUrlParams();
+  const expensesParams: { [key: string]: any } = new ExpensesUrlParams();
 
   if (params) {
     Object.keys(params).forEach((p) => {
-      _params[p] = params[p];
+      expensesParams[p] = params[p];
     });
   }
 
-  return { ..._params } as IExpensesParams;
+  return { ...expensesParams } as IExpensesParams;
 }

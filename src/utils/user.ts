@@ -1,7 +1,7 @@
 /**
  * Get user initials for buttons etc.
  */
-export const getUserInitials = (name: string) => {
+export function getUserInitials(name: string) {
   if (!name) return "";
 
   const nameArr = name.split(" ");
@@ -12,4 +12,4 @@ export const getUserInitials = (name: string) => {
   }
 
   return initials;
-};
+}

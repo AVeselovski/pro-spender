@@ -20,24 +20,6 @@ const INSIGHTS = [
   { value: "Average true budget of Utilitites is 551,20€" },
 ];
 
-const Summary = () => {
-  const insights = INSIGHTS; // TEMP > select latest insights
-
-  return (
-    <Box sx={{ minHeight: 170, mb: 1.5 }}>
-      <Title>March 2022</Title>
-
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Box>
-          <LatestInsights insights={insights} />
-        </Box>
-      </Box>
-    </Box>
-  );
-};
-
-export default Summary;
-
 const Title: FC = ({ children }) => (
   <Typography
     color="default"
@@ -97,3 +79,21 @@ const LatestInsights: FC<LatestInsightsProps> = ({ insights }) => {
     </Timeline>
   );
 };
+
+const Summary = () => {
+  const insights = INSIGHTS; // TEMP > select latest insights
+
+  return (
+    <Box sx={{ minHeight: 170, mb: 1.5 }}>
+      <Title>March 2022</Title>
+
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box>
+          <LatestInsights insights={insights} />
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+export default Summary;

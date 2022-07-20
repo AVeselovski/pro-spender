@@ -1,42 +1,12 @@
-import { createSelector } from "reselect";
+import { createSelector, Selector } from "reselect";
 
-import type { Selector } from "reselect";
-import type { RootState } from "../store";
-import type { IBudgetSummary, ICategory, ICategoryWithExpenses } from "./types";
-import type { IExpense } from "../expenses/types";
-
-function _selectCategoriesWithExpenses({
-  categories,
-  expenses,
-}: {
-  categories: ICategory[];
-  expenses: IExpense[];
-}) {
-  const categoriesWithExpenses = categories.map((category) => {
-    let sum = 0;
-    const categoryExpenses = expenses.reduce((arr: IExpense[], item) => {
-      if (category.id === item.categoryId) {
-        arr.push(item);
-        sum += item.amount;
-      }
-
-      return arr;
-    }, []);
-
-    const percentage = (sum / category.budget) * 100;
-
-    return {
-      ...category,
-      expenses: categoryExpenses,
-      sum,
-      percentage,
-    };
-  });
-
-  return categoriesWithExpenses;
-}
+import { RootState } from "../store";
+import { IBudgetSummary, ICategory, ICategoryWithExpenses } from "./types";
+import { IExpense } from "../expenses/types";
 
 export const selectRawCategories = (state: RootState) => state.categories.items;
+
+export const selectTabs = (state: RootState) => state.categories.tabs;
 
 /**
  * Selects categories with all expenses and expenses summary (sum, percentage).
@@ -83,3 +53,34 @@ export const selectTotalBudgetSummary: Selector<RootState, IBudgetSummary> = cre
     percentage: (expenses / budget) * 100 || 0,
   })
 );
+
+function _selectCategoriesWithExpenses({
+  categories,
+  expenses,
+}: {
+  categories: ICategory[];
+  expenses: IExpense[];
+}) {
+  const categoriesWithExpenses = categories.map((category) => {
+    let sum = 0;
+    const categoryExpenses = expenses.reduce((arr: IExpense[], item) => {
+      if (category.id === item.categoryId) {
+        arr.push(item);
+        sum += item.amount;
+      }
+
+      return arr;
+    }, []);
+
+    const percentage = (sum / category.budget) * 100;
+
+    return {
+      ...category,
+      expenses: categoryExpenses,
+      sum,
+      percentage,
+    };
+  });
+
+  return categoriesWithExpenses;
+}

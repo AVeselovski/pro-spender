@@ -1,11 +1,19 @@
 import * as actionCreator from "utils/actionUtility";
-import * as effect from "./categories.effect";
 import HttpErrorResponse from "models/HttpErrorResponse";
+import * as effect from "./categories.effect";
+import { AppDispatch, RootState } from "../store";
+import { IAction } from "../types";
 
-import type { AppDispatch, RootState } from "../store";
+export const SET_TAB: string = "categories/ASYNC_GET_CATEGORIES";
 
-export const ASYNC_GET_CATEGORIES: string = "expenses/ASYNC_GET_CATEGORIES";
-export const ASYNC_GET_CATEGORIES_FINISHED: string = "expenses/ASYNC_GET_CATEGORIES_FINISHED";
+export function setTab(key: string, value: number): IAction<string> {
+  return actionCreator.createAction(SET_TAB, { [key]: value });
+}
+
+/* Async */
+
+export const ASYNC_GET_CATEGORIES: string = "categories/ASYNC_GET_CATEGORIES";
+export const ASYNC_GET_CATEGORIES_FINISHED: string = "categories/ASYNC_GET_CATEGORIES_FINISHED";
 
 export function getCategories(): any {
   return async (dispatch: AppDispatch, getState: RootState) => {

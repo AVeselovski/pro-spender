@@ -1,10 +1,9 @@
 import * as actionCreator from "utils/actionUtility";
 import * as effect from "./user.effect";
 import HttpErrorResponse from "models/HttpErrorResponse";
-
-import type { AppDispatch, RootState } from "../store";
-import type { IAction } from "../types";
-import type { ICredentials } from "./types";
+import { AppDispatch, RootState } from "../store";
+import { IAction } from "../types";
+import { ICredentials } from "./types";
 
 export const ASYNC_CREATE_USER: string = "user/ASYNC_CREATE_USER";
 export const ASYNC_CREATE_USER_FINISHED: string = "user/ASYNC_CREATE_USER_FINISHED";

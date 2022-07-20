@@ -1,6 +1,5 @@
 import * as actionCreator from "utils/actionUtility";
-
-import type { IAction } from "../types";
+import { IAction } from "../types";
 
 export const REMOVE_ERROR: string = "error/REMOVE_ERROR";
 
